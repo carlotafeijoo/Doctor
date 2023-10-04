@@ -18,6 +18,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(propOrder= {"name" , "age"})
 public class Elderly implements Serializable{
 	
+	
+	
+	//pkepokrehpok
+	
 	private static final long serialVersionUID = -8265618237491167237L;
 	
 	@XmlTransient
