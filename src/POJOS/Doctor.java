@@ -13,44 +13,42 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="Staff")
-@XmlType(propOrder= {"name","phone", "dob", "address"})
-public class Staff {
+//@XmlAccessorType(XmlAccessType.FIELD)
+//@XmlRootElement(name="Staff")
+//@XmlType(propOrder= {"name","phone", "dob", "address"})
+
+public class Doctor {
 	
-	
-	@XmlAttribute
+
+	//@XmlTransient //this means i dont want the id to be shown in xml
+	private int doctor_id;
+	//@XmlAttribute
 	private String name;
-	@XmlTransient //this means i dont want the id to be shown in xml
-	private int staff_id;
-	@XmlTransient
-	private String email;
-	@XmlTransient
-	private String field;
-	@XmlElement
-	private Integer phone;
-	@XmlElement
+	//@XmlElement
 	private Date dob;
-	@XmlElement
+	//@XmlTransient
+	private String email;
+	//@XmlElement
+	private Integer phone;
+	//@XmlElement
 	private String address;
-	@XmlTransient 
+	//@XmlTransient 
 	private List<Elderly> elderlies; // Many to many relationship
 
 
 	//Empty constructor
-	public Staff() {
+	public Doctor() {
 		super();
 		elderlies= new ArrayList<Elderly>();
 	}
 
 
 	//Constructor with all the class Task´s attributes as parameters
-	public Staff(String name, int staff_id, String field, Integer phone, Date dob, String address, 
+	public Doctor(String name, int doctor_id, Integer phone, Date dob, String address, 
 			List<Elderly> elderlies, String email) {
 		super();
 		this.name = name;
-		this.staff_id = staff_id;
-		this.field = field;
+		this.doctor_id = doctor_id;
 		this.phone = phone;
 		this.dob = dob;
 		this.address = address;
@@ -58,7 +56,7 @@ public class Staff {
 		this.email=email;
 	}
 	
-	public Staff(String name, Integer phone, Date dob, String address) {
+	public Doctor(String name, Integer phone, Date dob, String address) {
 		super();
 		this.name = name;
 		this.phone = phone;
@@ -67,9 +65,8 @@ public class Staff {
 	}
 
 
-	public Staff(String name, Integer phone, Date dob, String address, String field, String email) {
+	public Doctor(String name, Integer phone, Date dob, String address, String email) {
 		this.email=email;
-		this.field=field;
 		this.address=address;
 		this.name=name;
 		this.phone=phone;
@@ -78,10 +75,9 @@ public class Staff {
 	
 	
 
-	public Staff(int staff_id, String name,  String field, Date dob, String address, Integer phone, String email) {
-		this.staff_id=staff_id;
+	public Doctor(int doctor_id, String name, Date dob, String address, Integer phone, String email) {
+		this.doctor_id=doctor_id;
 		this.email=email;
-		this.field=field;
 		this.address=address;
 		this.name=name;
 		this.phone=phone;
@@ -98,23 +94,13 @@ public class Staff {
 	}
 
 
-	public int getStaff_id() {
-		return staff_id;
+	public int getdoctor_id() {
+		return doctor_id;
 	}
 
 
-	public void setStaff_id(int staff_id) {
-		this.staff_id = staff_id;
-	}
-
-
-	public String getField() {
-		return field;
-	}
-
-
-	public void setField(String field) {
-		this.field = field;
+	public void setdoctor_id(int doctor_id) {
+		this.doctor_id = doctor_id;
 	}
 
 
@@ -167,7 +153,7 @@ public class Staff {
 	// Has an equals (uses only name)
 	@Override
 	public int hashCode() {
-		return Objects.hash(name);
+		return Objects.hash(doctor_id);
 	}
 
 	@Override
@@ -178,14 +164,14 @@ public class Staff {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Staff other = (Staff) obj;
+		Doctor other = (Doctor) obj;
 		return Objects.equals(name, other.name);
 	}
 
 
 	@Override
 	public String toString() {
-		return "\n [Staff [name=" + name + ", staff_id=" + staff_id + ", email=" + email + ", field=" + field + ", phone="
+		return "\n [Staff [name=" + name + ", doctor_id=" + doctor_id + ", email=" + email + ", phone="
 				+ phone + ", dob=" + dob + ", address=" + address + ", elderlies=" + elderlies + "]]";
 	}
 	

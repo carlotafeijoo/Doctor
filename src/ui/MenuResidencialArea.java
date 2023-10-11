@@ -105,7 +105,7 @@ public class MenuResidencialArea {
 			
 			//int staff_id = staffManager.searchStaffIdfromUId(id);
 			//Staff staff = staffManager.searchStaffbyId(staff_id);
-			Staff staff = null;
+			Doctor staff = null;
 			System.out.println(staff);
 			System.out.println("Login successful!");
 			staffMenu(u.getId());
@@ -135,7 +135,7 @@ public class MenuResidencialArea {
 				
 				case 1:
 					//int staff_id = staffManager.searchStaffIdfromUId(User_id);
-					Staff staffToUpdate = null;
+					Doctor staffToUpdate = null;
 					//Staff staffToUpdate =staffManager.searchStaffbyId(staff_id);
 					if(staffToUpdate !=null) {
 						int newPhone = InputException.getInt("Enter your new phone number: ");
@@ -290,7 +290,7 @@ public class MenuResidencialArea {
 		//userManager.newUser(u);
 	
 		// CREATE STAFF AND ADD TO JDBD
-		Staff staff = new Staff(name, phone,dob, address, field, email);
+		Doctor staff = new Doctor(name, phone,dob, address, field, email);
 		staff.setField(field); 
 		
 		//staffManager.addStaffMember(staff);

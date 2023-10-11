@@ -6,7 +6,8 @@ public class Task {
     //Attributes of Task class
     private int task_id;
     private String description;
-    private int staff_id;
+    private int duration;
+    private Doctor doctor;
     
 
     //Empty constructor
@@ -15,17 +16,19 @@ public class Task {
     }
 
     //Constructor with all the class Task´s attributes as parameters
-    public Task (int task_id, String description, int staff_id) {
+    
+    //NUEVO CONSTRUCTOR PENTIENTE CON duration -> PARA EVITAR ERRORES Y ENTENDER FUNCIONAMENTO
+    public Task (int task_id, String description, Doctor doctor) {
     	super();
     	this.task_id= task_id;
         this.description = description;   
-        this.staff_id=staff_id;
+        this.doctor=doctor;
     }
 	
-    public Task ( String description, int staff_id) {
+    public Task (String description, Doctor doctor) {
     	super();
         this.description = description;   
-        this.staff_id=staff_id;
+        this.doctor=doctor;
     }
 	
     
@@ -37,13 +40,14 @@ public class Task {
 		this.task_id = task_id;
 	}
 
-	public int getStaff_id() {
-		return staff_id;
+	public Doctor getDoctor() {
+		return doctor;
 	}
 
-	public void setStaff_id(int staff_id) {
-		this.staff_id = staff_id;
+	public void setDoctoe(Doctor doctor) {
+		this.doctor = doctor;
 	}
+	
 	public String getDescription() {
 		return description;
 	}
@@ -51,11 +55,19 @@ public class Task {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
 
 	// Has an equals (uses only description)
     @Override
     public int hashCode() {
-        return Objects.hash(description);
+        return Objects.hash(task_id);
     }
 
     @Override
@@ -72,7 +84,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "\n [Task [description=" + description +", staff member who performs it= " + staff_id +" ]]";
+        return "\n [Task [description=" + description +", prescribed by Dr. " + doctor.getName() +" ]]";
     }
     
 }

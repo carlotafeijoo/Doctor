@@ -13,30 +13,32 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="Elderly")
-@XmlType(propOrder= {"name" , "age"})
+//@XmlAccessorType(XmlAccessType.FIELD)
+//@XmlRootElement(name="Elderly")
+//@XmlType(propOrder= {"name" , "age"})
 public class Elderly implements Serializable{
 	
 	
 	
-	//pkepokrehpok
+
 	
 	private static final long serialVersionUID = -8265618237491167237L;
 	
-	@XmlTransient
+	//@XmlTransient
 	private int elderly_id;
-	@XmlAttribute
+	//@XmlAttribute
 	private String name;
-	@XmlElement
+	//@XmlElement
 	private int age;
-	@XmlTransient
-	private List<Staff> staffmembers;
+	//@XmlTransient
+	private List<Doctor> doctor_list;
 	
 	public Elderly() {
 		super();
-		setStaffmembers(new ArrayList<Staff>());
+		setDoctor_list(new ArrayList<Doctor>());
 	}
+	
+	//pendiente anadir constructores
 	
 	public Elderly(int elderly_id, String name, int age) {
 		super();
@@ -75,12 +77,12 @@ public class Elderly implements Serializable{
 		this.age = age;
 	}
 
-	public List<Staff> getStaffmembers() {
-		return staffmembers;
+	public List<Doctor> getDoctor_list() {
+		return doctor_list;
 	}
 
-	public void setStaffmembers(List<Staff> staffmembers) {
-		this.staffmembers = staffmembers;
+	public void setDoctor_list(List<Doctor> doctor_list) {
+		this.doctor_list = doctor_list;
 	}
 
 	public static long getSerialversionuid() {
@@ -89,13 +91,13 @@ public class Elderly implements Serializable{
 
 	@Override
 	public String toString() {
-		return "\n [Elderly [elderly_id=" + elderly_id + ", name=" + name + ", age=" + age + ", staffmembers="
-				+ staffmembers + "]]";
+		return "\n [Elderly [elderly_id=" + elderly_id + ", name=" + name + ", age=" + age + ", doctor_list="
+				+ doctor_list + "]]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(age, elderly_id, name);
+		return Objects.hash(elderly_id);
 	}
 	@Override
 	public boolean equals(Object obj) {
