@@ -2,6 +2,7 @@ package POJOS;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,10 +19,6 @@ import javax.xml.bind.annotation.XmlType;
 //@XmlType(propOrder= {"name" , "age"})
 public class Elderly implements Serializable{
 	
-	
-	
-
-	
 	private static final long serialVersionUID = -8265618237491167237L;
 	
 	//@XmlTransient
@@ -29,7 +26,7 @@ public class Elderly implements Serializable{
 	//@XmlAttribute
 	private String name;
 	//@XmlElement
-	private int age;
+	private Date dob;
 	//@XmlTransient
 	private List<Doctor> doctor_list;
 	
@@ -40,17 +37,17 @@ public class Elderly implements Serializable{
 	
 	//pendiente anadir constructores
 	
-	public Elderly(int elderly_id, String name, int age) {
+	public Elderly(int elderly_id, String name, Date dob) {
 		super();
 		this.elderly_id = elderly_id;
 		this.name = name;
-		this.age = age;
+		this.dob = dob;
 	} 
 	
-	public Elderly( String name, int age) {
+	public Elderly( String name, Date dob) {
 		super();
 		this.name = name;
-		this.age = age;
+		this.dob = dob;
 	}   
 	
 	public int getElderly_id() {
@@ -69,12 +66,13 @@ public class Elderly implements Serializable{
 		this.name = name;
 	}
 
-	public int getAge() {
-		return age;
+	public Date getDob() {
+		return dob;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+
+	public void setDob(Date dob) {
+		this.dob = dob;
 	}
 
 	public List<Doctor> getDoctor_list() {
@@ -91,7 +89,7 @@ public class Elderly implements Serializable{
 
 	@Override
 	public String toString() {
-		return "\n [Elderly [elderly_id=" + elderly_id + ", name=" + name + ", age=" + age + ", doctor_list="
+		return "\n [Elderly [elderly_id=" + elderly_id + ", name=" + name + ", date of birth=" + dob + ", doctor_list="
 				+ doctor_list + "]]";
 	}
 
@@ -108,7 +106,7 @@ public class Elderly implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Elderly other = (Elderly) obj;
-		return age == other.age && elderly_id == other.elderly_id && Objects.equals(name, other.name);
+		return dob == other.dob && elderly_id == other.elderly_id && Objects.equals(name, other.name);
 	}	
 
 }
