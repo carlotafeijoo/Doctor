@@ -41,10 +41,10 @@ public class Task {
 		this.doctor_id = doctor_id;
 	}
 
-	public Task(String description, int doctor_id) {
+	public Task(String description, int duration) {
 		super();
 		this.description = description;
-		this.doctor_id = doctor_id;
+		this.doctor_id = duration;
 	}
 
 	public int getTask_id() {
@@ -109,6 +109,10 @@ public class Task {
 	public String toString() {
 		return "Task [task_id=" + task_id + ", description=" + description + ", doctor_id=" + doctor_id + ", duration="
 				+ duration + ", elderly_id=" + elderly_id + "]";
+	}
+	
+	public String toStringtoElderly() {
+		return "Task: "+this.description + " Duration : "+ this.duration;
 	}
 
 }

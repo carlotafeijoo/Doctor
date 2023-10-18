@@ -10,35 +10,31 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-//import Interfaces.*;
 import exceptions.InputException;
-//import jdbc.*;
-//import jpa.JPAUserManager;
 import POJOS.*;
 
 public class DoctorMenuResidencialArea {
 
 	private static BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
+/*
+	private static ElderlyManager elderlyManager;
 
-	//private static ElderlyManager elderlyManager;
+	private static DoctorManager DoctorManager;
 
-	//private static DoctorManager DoctorManager;
+	private static UserManager userManager;
 
-	//private static UserManager userManager;
-
-	//private static TaskManager tasksManager;
-
+	private static TaskManager tasksManager;*/
 	public static void main(String[] args) {
 
 		System.out.println("WELCOME TO THE RESIDENCIAL AREA DATA BASE");
-		//JDBCManager jdbcManager = new JDBCManager();
+		/*JDBCManager jdbcManager = new JDBCManager();
 
 		// initialize database JDBC
-		//elderlyManager = new JDBCElderlyManager(jdbcManager);
-		//DoctorManager = new JDBCDoctorManager(jdbcManager);
-		//tasksManager = new JDBCTasksManager(jdbcManager);
+		elderlyManager = new JDBCElderlyManager(jdbcManager);
+		DoctorManager = new JDBCDoctorManager(jdbcManager);
+		tasksManager = new JDBCTasksManager(jdbcManager);
 		// initialize database JPA
-		//userManager = new JPAUserManager();
+		userManager = new JPAUserManager();*/
 		mainMenu();
 
 	}
@@ -48,19 +44,20 @@ public class DoctorMenuResidencialArea {
 
 			int option;
 			do {
-				System.out.println("WELCOME AGAIN DOCTOR ");
-				System.out.println("1. Enter ");
+				System.out.println("MAIN MENU ");
+				System.out.println("1. Enter  ");
 				System.out.println("2. Exit ");
 				option = InputException.getInt("Introduce the number choice:  ");
 
 				switch (option) {
 
 
+
 				case 1:
 					logindoctor();
 					break;
 
-				case 3:
+				case 2:
 					System.out.println("YOU HAVE EXIT THE RESIDENCIAL AREA DATA BASE");
 					System.exit(3);
 					break;
@@ -75,6 +72,7 @@ public class DoctorMenuResidencialArea {
 		}
 
 	}
+
 
 
 
@@ -96,31 +94,19 @@ public class DoctorMenuResidencialArea {
 			mainMenu();
 		}
 
-		 //depending on the type of user we open a different menu
+		// depending on the type of user we open a different menu
 		if (u != null && u.getRole().getName().equals("Doctor")) {
 			Integer id = u.getId();
 
-			int doctor_id =0; //DoctorManager.searchDoctorIdfromUId(id);
-			Doctor doctor =null; //DoctorManager.searchDoctorbyId(doctor_id);
+			int doctor_id = 0;//DoctorManager.searchDoctorIdfromUId(id);
+			Doctor doctor = null;//DoctorManager.searchDoctorbyId(doctor_id);
 			System.out.println(doctor);
 			System.out.println("Login successful!");
 			doctorMenu(u.getId());
 
 		}
 
-		if (u != null && u.getRole().getName().equals("Elderly")) {
-			Integer id = u.getId();
-
-			int elderly_id =0; //elderlyManager.searchElderlyIdfromUId(id);
-
-			Elderly elderly=null;
-			//Elderly elderly = elderlyManager.searchElderlyById(elderly_id);
-
-			System.out.println(elderly);
-			System.out.println("Login successful!");
-			doctorMenu(u.getId());
-
-		}
+		
 
 	}
 
@@ -140,13 +126,12 @@ public class DoctorMenuResidencialArea {
 
 				case 1:
 					int doctor_id = 0;//DoctorManager.searchDoctorIdfromUId(User_id);
-					Doctor doctorToUpdate = null;//DoctorManager.searchDoctorbyId(doctor_id);
-					
+					Doctor doctorToUpdate =null;// DoctorManager.searchDoctorbyId(doctor_id);
 					if (doctorToUpdate != null) {
 						int newPhone = InputException.getInt("Enter your new phone number: ");
-						//doctorToUpdate.setPhone(newPhone);
+						doctorToUpdate.setPhone(newPhone);
 						String newAddress = InputException.getString("Enter your new address: ");
-						//doctorToUpdate.setAddress(newAddress);
+						doctorToUpdate.setAddress(newAddress);
 						//DoctorManager.updateDoctorMemberInfo(doctorToUpdate);
 						System.out.println("Information updated successfully! ");
 					} else {
@@ -155,13 +140,13 @@ public class DoctorMenuResidencialArea {
 					break;
 
 				case 2:
-					int doctorToAssignNewTask_id = 0;//DoctorManager.searchDoctorIdfromUId(User_id);
+					int doctorToAssignNewTask_id =0;// DoctorManager.searchDoctorIdfromUId(User_id);
 					addTask(doctorToAssignNewTask_id);
 					System.out.println("Task added sucessfully!");
 					break;
 
 				case 3:
-					int doctorAllTask_id =0; //DoctorManager.searchDoctorIdfromUId(User_id);
+					int doctorAllTask_id = 0;//DoctorManager.searchDoctorIdfromUId(User_id);
 					List<Task> tasksList = null;//tasksManager.getListOfTasks(doctorAllTask_id);
 					System.out.println("List of tasks: " + tasksList);
 					break;
@@ -187,7 +172,7 @@ public class DoctorMenuResidencialArea {
 
 		String description = InputException.getString("Description: ");
 
-		 //print all elderlies of this doctor
+		// print all elderlies of this doctor
 		List<Elderly> elderlies = null;//elderlyManager.getListOfElderlyByDoctorID(doctorToAssignNewTask_id);
 		for (int i = 0; i < elderlies.size(); i++) {
 			System.out.println(elderlies.get(i).toString() + "\n");
@@ -294,13 +279,14 @@ public class DoctorMenuResidencialArea {
 
 		// CREATE doctor AND ADD TO JPA
 		User u = new User(username, digest);
-		Role role =null; //userManager.getRole("Doctor");
+		Role role =null;// userManager.getRole("Doctor");
 		u.setRole(role);
 		role.addUser(u);
 		//userManager.newUser(u);
 
 		// CREATE doctor AND ADD TO JDBD
 		Doctor doctor = new Doctor(name, phone, dob, address, email);
+		// doctor.setField(field);
 
 		//DoctorManager.addDoctorMember(doctor);
 		System.out.println("Register sucessfull!");
