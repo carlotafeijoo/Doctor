@@ -16,7 +16,7 @@ import exceptions.InputException;
 //import jpa.JPAUserManager;
 import POJOS.*;
 
-public class MenuResidencialArea {
+public class DoctorMenuResidencialArea {
 
 	private static BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
 
@@ -48,19 +48,15 @@ public class MenuResidencialArea {
 
 			int option;
 			do {
-				System.out.println("MAIN MENU ");
-				System.out.println("1. I am an elderly ");
-				System.out.println("2. I am a doctor  ");
-				System.out.println("3. Exit ");
+				System.out.println("WELCOME AGAIN DOCTOR ");
+				System.out.println("1. Enter ");
+				System.out.println("2. Exit ");
 				option = InputException.getInt("Introduce the number choice:  ");
 
 				switch (option) {
 
-				case 1:
-					loginElderly();
-					break;
 
-				case 2:
+				case 1:
 					logindoctor();
 					break;
 
@@ -80,105 +76,9 @@ public class MenuResidencialArea {
 
 	}
 
-	private static void administratorMenu() {
-		try {
-			int opcion;
-			do {
-				System.out.println("1. Elderly management. ");
-				System.out.println("2. Back. ");
-				opcion = InputException.getInt("Introduce the number choice:  ");
 
-				switch (opcion) {
-				case 1:
-					elderlyMenu();
-					break;
-				case 2:
-					mainMenu();
-					break;
 
-				}
-			} while (true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
-	private static void elderlyMenu() {
-
-		try {
-			int choice;
-			do {
-
-				System.out.println("1. Record signal.  ");
-				System.out.println("2. Back");
-
-				choice = InputException.getInt("Introduce your choice: ");
-
-				switch (choice) {
-
-				case 1:
-					// funcion de llamar al bitalino
-					break;
-				case 2:
-					mainMenu();
-					break;
-
-				default:
-					break;
-				}
-			} while (true);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void registerElderly() throws Exception {
-
-		System.out.println("Input the information of the new elderly: ");
-
-		String name = InputException.getString(" Name: ");
-
-		int day = InputException.getInt("Day of birth:  ");
-		int month = InputException.getInt("Month of birth:  ");
-		int year = InputException.getInt("Year of birth:  ");
-		int dni = InputException.getInt("DNI without letter:  ");
-
-		//ArrayList<Doctor> doctores = DoctorManager.searchAllDoctors();
-
-		//for (int i = 0; i < doctores.size(); i++) {
-			//System.out.println(doctores.get(i).toStringForPatients());
-		//}
-		int doctor_id = InputException.getInt("put the id of your doctor:  ");
-
-		System.out.println(" info: your username will be your dni ");
-		Date dob = new Date(year, month, day);
-
-		String username = "" + dni;
-		String password = InputException.getString("Password: ");
-		MessageDigest md = MessageDigest.getInstance("MD5");
-		md.update(password.getBytes());
-		byte[] digest = md.digest();
-
-		User u = new User(username, digest);
-		//Role role = userManager.getRole("Elderly");
-		//u.setRole(role);
-		//role.addUser(u);
-		//userManager.newUser(u);
-
-		Elderly elderly = new Elderly(name, dni, dob, doctor_id);
-
-		//elderlyManager.addElderly(elderly);
-		elderlyMenu();
-
-	}
-
-	private static void getListOfElderlies() throws IOException, Exception {
-		System.out.println("The list of elderlies is: ");
-		//List<Elderly> resultado = elderlyManager.getListOfElderly();
-		//System.out.println(resultado);
-		elderlyMenu();
-	}
 
 	public static void logIn() throws Exception {
 
@@ -189,37 +89,38 @@ public class MenuResidencialArea {
 		md.update(password.getBytes());
 		byte[] digest = md.digest();
 
-		//User u = userManager.checkPassword(username, digest);
+		User u = null;//userManager.checkPassword(username, digest);
 
-		//if (u == null) {
+		if (u == null) {
 			System.out.println("User not found");
 			mainMenu();
-		//}
+		}
 
-		// depending on the type of user we open a different menu
-		//if (u != null && u.getRole().getName().equals("Doctor")) {
-			//Integer id = u.getId();
+		 //depending on the type of user we open a different menu
+		if (u != null && u.getRole().getName().equals("Doctor")) {
+			Integer id = u.getId();
 
-			//int doctor_id = DoctorManager.searchDoctorIdfromUId(id);
-			//Doctor doctor = DoctorManager.searchDoctorbyId(doctor_id);
-			//System.out.println(doctor);
+			int doctor_id =0; //DoctorManager.searchDoctorIdfromUId(id);
+			Doctor doctor =null; //DoctorManager.searchDoctorbyId(doctor_id);
+			System.out.println(doctor);
 			System.out.println("Login successful!");
-			//doctorMenu(u.getId());
+			doctorMenu(u.getId());
 
-		//}
+		}
 
-		//if (u != null && u.getRole().getName().equals("Elderly")) {
-			//Integer id = u.getId();
+		if (u != null && u.getRole().getName().equals("Elderly")) {
+			Integer id = u.getId();
 
-			//int elderly_id = elderlyManager.searchElderlyIdfromUId(id);
+			int elderly_id =0; //elderlyManager.searchElderlyIdfromUId(id);
 
+			Elderly elderly=null;
 			//Elderly elderly = elderlyManager.searchElderlyById(elderly_id);
 
-			//System.out.println(elderly);
+			System.out.println(elderly);
 			System.out.println("Login successful!");
-			//doctorMenu(u.getId());
+			doctorMenu(u.getId());
 
-		//}
+		}
 
 	}
 
@@ -238,31 +139,31 @@ public class MenuResidencialArea {
 				switch (choice) {
 
 				case 1:
-					//int doctor_id = DoctorManager.searchDoctorIdfromUId(User_id);
-					//Doctor doctorToUpdate = DoctorManager.searchDoctorbyId(doctor_id);
+					int doctor_id = 0;//DoctorManager.searchDoctorIdfromUId(User_id);
+					Doctor doctorToUpdate = null;//DoctorManager.searchDoctorbyId(doctor_id);
 					
-					//if (doctorToUpdate != null) {
+					if (doctorToUpdate != null) {
 						int newPhone = InputException.getInt("Enter your new phone number: ");
 						//doctorToUpdate.setPhone(newPhone);
 						String newAddress = InputException.getString("Enter your new address: ");
 						//doctorToUpdate.setAddress(newAddress);
 						//DoctorManager.updateDoctorMemberInfo(doctorToUpdate);
 						System.out.println("Information updated successfully! ");
-					//} else {
+					} else {
 						System.out.println("doctor update fail.");
-					//}
+					}
 					break;
 
 				case 2:
-					//int doctorToAssignNewTask_id = DoctorManager.searchDoctorIdfromUId(User_id);
-					//addTask(doctorToAssignNewTask_id);
+					int doctorToAssignNewTask_id = 0;//DoctorManager.searchDoctorIdfromUId(User_id);
+					addTask(doctorToAssignNewTask_id);
 					System.out.println("Task added sucessfully!");
 					break;
 
 				case 3:
-					//int doctorAllTask_id = DoctorManager.searchDoctorIdfromUId(User_id);
-					//List<Task> tasksList = tasksManager.getListOfTasks(doctorAllTask_id);
-					//System.out.println("List of tasks: " + tasksList);
+					int doctorAllTask_id =0; //DoctorManager.searchDoctorIdfromUId(User_id);
+					List<Task> tasksList = null;//tasksManager.getListOfTasks(doctorAllTask_id);
+					System.out.println("List of tasks: " + tasksList);
 					break;
 
 				case 4:
@@ -286,43 +187,17 @@ public class MenuResidencialArea {
 
 		String description = InputException.getString("Description: ");
 
-		// print all elderlies of this doctor
-		//List<Elderly> elderlies = elderlyManager.getListOfElderlyByDoctorID(doctorToAssignNewTask_id);
-		//for (int i = 0; i < elderlies.size(); i++) {
-			//System.out.println(elderlies.get(i).toString() + "\n");
-		//}
+		 //print all elderlies of this doctor
+		List<Elderly> elderlies = null;//elderlyManager.getListOfElderlyByDoctorID(doctorToAssignNewTask_id);
+		for (int i = 0; i < elderlies.size(); i++) {
+			System.out.println(elderlies.get(i).toString() + "\n");
+		}
 		int elderly_id = InputException.getInt("Elderly id: ");
 		int duration = InputException.getInt("Duration: ");
-		//Task task = new Task(description, doctorToAssignNewTask_id, duration, elderly_id);
+		Task task = new Task(description, doctorToAssignNewTask_id, duration, elderly_id);
 		//tasksManager.addTask(task);
 	}
 
-	private static void loginElderly() throws Exception {
-		System.out.println("1. Register");
-		System.out.println("2. Log in ");
-		System.out.println("3. Exit");
-		int choice = InputException.getInt(" Introduce the number of your choice: ");
-
-		switch (choice) {
-		case 1:
-			// Call method REGISTER
-			registerElderly();
-			break;
-
-		case 2:
-			// LOG IN as doctor member
-			logIn();
-			break;
-
-		case 3:
-			// EXIT
-			mainMenu();
-			break;
-
-		default:
-			break;
-		}
-	}
 
 	private static void logindoctor() throws Exception {
 
@@ -419,14 +294,13 @@ public class MenuResidencialArea {
 
 		// CREATE doctor AND ADD TO JPA
 		User u = new User(username, digest);
-		//Role role = userManager.getRole("Doctor");
-		//u.setRole(role);
-		//role.addUser(u);
+		Role role =null; //userManager.getRole("Doctor");
+		u.setRole(role);
+		role.addUser(u);
 		//userManager.newUser(u);
 
 		// CREATE doctor AND ADD TO JDBD
 		Doctor doctor = new Doctor(name, phone, dob, address, email);
-		// doctor.setField(field);
 
 		//DoctorManager.addDoctorMember(doctor);
 		System.out.println("Register sucessfull!");
