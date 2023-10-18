@@ -3,36 +3,50 @@ package POJOS;
 import java.util.Objects;
 
 public class Task {
-    //Attributes of Task class
-    private int task_id;
-    private String description;
-    private int duration;
-    private Doctor doctor;
-    private Elderly elderly_id;
-    
 
-    //Empty constructor
-    public Task() {
-        super();
-    }
+	private int task_id;
+	private String description;
+	private int doctor_id;
+	private int duration;
+	private int elderly_id;
 
-    //Constructor with all the class Task´s attributes as parameters
-    
-    //NUEVO CONSTRUCTOR PENTIENTE CON duration -> PARA EVITAR ERRORES Y ENTENDER FUNCIONAMENTO
-    public Task (int task_id, String description, Doctor doctor) {
-    	super();
-    	this.task_id= task_id;
-        this.description = description;   
-        this.doctor=doctor;
-    }
-	
-    public Task (String description, Doctor doctor) {
-    	super();
-        this.description = description;   
-        this.doctor=doctor;
-    }
-	
-    
+	public Task() {
+		super();
+	}
+
+	public Task(String description, int doctor_id, int duration, int elderly_id) {
+		super();
+		this.task_id = task_id;
+		this.description = description;
+		this.doctor_id = doctor_id;
+		this.duration = duration;
+		this.elderly_id = elderly_id;
+	}
+
+	public Task(int task_id, String description, int doctor_id, int duration, int elderly_id) {
+		super();
+		this.task_id = task_id;
+		this.description = description;
+		this.doctor_id = doctor_id;
+		this.duration = duration;
+		this.elderly_id = elderly_id;
+	}
+
+	// NUEVO CONSTRUCTOR PENTIENTE CON duration -> PARA EVITAR ERRORES Y ENTENDER
+	// FUNCIONAMENTO
+	public Task(int task_id, String description, int doctor_id) {
+		super();
+		this.task_id = task_id;
+		this.description = description;
+		this.doctor_id = doctor_id;
+	}
+
+	public Task(String description, int doctor_id) {
+		super();
+		this.description = description;
+		this.doctor_id = doctor_id;
+	}
+
 	public int getTask_id() {
 		return task_id;
 	}
@@ -41,14 +55,14 @@ public class Task {
 		this.task_id = task_id;
 	}
 
-	public Doctor getDoctor() {
-		return doctor;
+	public int getDoctor_id() {
+		return doctor_id;
 	}
 
-	public void setDoctor(Doctor doctor) {
-		this.doctor = doctor;
+	public void setDoctor_id(int doctor_id) {
+		this.doctor_id = doctor_id;
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}
@@ -56,45 +70,45 @@ public class Task {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public int getDuration() {
 		return duration;
 	}
 
-	public void setDuration(Elderly elderly_id) {
+	public void setDuration(int elderly_id) {
 		this.elderly_id = elderly_id;
 	}
-	
-	public Elderly getElderly() {
+
+	public int getElderly_id() {
 		return elderly_id;
 	}
 
-	public void setElderly(Elderly elderly_id) {
+	public void setElderly_id(int elderly_id) {
 		this.elderly_id = elderly_id;
 	}
 
 	// Has an equals (uses only description)
-    @Override
-    public int hashCode() {
-        return Objects.hash(task_id);
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hash(task_id);
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Task other = (Task) obj;
-            return Objects.equals(description, other.description);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Task other = (Task) obj;
+		return Objects.equals(description, other.description);
+	}
 
-    @Override
-    public String toString() {
-        return "\n [Task [description=" + description +", prescribed by Dr. " + doctor.getName() +" ]]";
-    } //ver si necesitamos anadir info
-    
+	@Override
+	public String toString() {
+		return "Task [task_id=" + task_id + ", description=" + description + ", doctor_id=" + doctor_id + ", duration="
+				+ duration + ", elderly_id=" + elderly_id + "]";
+	}
+
 }
-
