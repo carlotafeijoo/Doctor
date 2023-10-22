@@ -1,11 +1,12 @@
 package POJOS;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-
 
 public class Elderly implements Serializable {
 
@@ -37,12 +38,10 @@ public class Elderly implements Serializable {
 		this.dni = dni;
 		this.name = name;
 		this.dob = dob;
-		this.doctor_id = doctor_id;
 	}
 
 	public Elderly(String name, int dni, Date dob, int doctor_id) {
 		super();
-		this.elderly_id = elderly_id;
 		this.dni = dni;
 		this.name = name;
 		this.dob = dob;
@@ -54,6 +53,22 @@ public class Elderly implements Serializable {
 		this.name = name;
 		this.dob = dob;
 	}
+	
+	//"Elderly [elderly_id=" + elderly_id + ", name=" + name + ", dni=" + dni + ", doctor_id=" + doctor_id
+	//+ ", dob=" + dob + "]";
+	public Elderly(String elderly_text) throws ParseException {
+		System.out.println(elderly_text.substring(elderly_text.indexOf("elderly_id=") +11, elderly_text.indexOf(", name=")));
+		this.elderly_id = Integer.parseInt(elderly_text.substring(elderly_text.indexOf("elderly_id=") +11, elderly_text.indexOf(", name")));
+		this.name = elderly_text.substring(elderly_text.indexOf("name=") + 5, elderly_text.indexOf(", dni"));		
+		this.dni = Integer.parseInt(elderly_text.substring(elderly_text.indexOf("dni=") +4, elderly_text.indexOf(", doctor_id")));
+		this.doctor_id = Integer.parseInt(elderly_text.substring(elderly_text.indexOf("doctor_id=") +10, elderly_text.indexOf(", dob")));
+
+		String date_text = "" + elderly_text.substring(elderly_text.indexOf("dob=") + 4, elderly_text.indexOf("]"));
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		this.dob = dateFormat.parse(date_text);
+
+	}
+
 
 	public int getElderly_id() {
 		return elderly_id;
@@ -93,7 +108,8 @@ public class Elderly implements Serializable {
 
 	@Override
 	public String toString() {
-		return "\n [elderly_id=" + elderly_id + ", name=" + name + ", date of birth=" + dob + "]";
+		return "Elderly [elderly_id=" + elderly_id + ", name=" + name + ", dni=" + dni + ", doctor_id=" + doctor_id
+				+ ", dob=" + dob + "]";
 	}
 
 	public int getDni() {

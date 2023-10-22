@@ -2,7 +2,6 @@ package exceptions;
 
 import java.io.*;
 
-
 public class InputException {
 
 	private static BufferedReader consola = new BufferedReader(new InputStreamReader(System.in));
@@ -39,7 +38,4 @@ public class InputException {
 		}
 	}
 
-	
 }
-
-

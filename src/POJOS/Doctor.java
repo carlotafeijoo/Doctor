@@ -1,10 +1,11 @@
 package POJOS;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-
 
 public class Doctor {
 
@@ -58,6 +59,23 @@ public class Doctor {
 		this.name = name;
 		this.phone = phone;
 		this.dob = dob;
+	}
+
+	// chuleta Doctor doctor = new Doctor(name, phone, dob, address, email);
+	//Doctor [name=Pepito, doctor_id=0, email=gmail, phone=34098, dob=0007-05-04, address=avenida]
+	public Doctor(String doctor_text) throws ParseException {
+		System.out.println(doctor_text.substring(doctor_text.indexOf("name=") + 5, doctor_text.indexOf(", doctor_id=")));
+		this.name = doctor_text.substring(doctor_text.indexOf("name=") + 5, doctor_text.indexOf(", doctor_id"));
+		this.doctor_id = Integer.parseInt(doctor_text.substring(doctor_text.indexOf("tor_id=") + 7, doctor_text.indexOf(", email")));
+		this.email = doctor_text.substring(doctor_text.indexOf("email=") + 6, doctor_text.indexOf(", phone"));
+		this.phone = Integer.parseInt(doctor_text.substring(doctor_text.indexOf("phone=") + 6, doctor_text.indexOf(", dob")));
+		String date_text = "" + doctor_text.substring(doctor_text.indexOf("dob=") + 4, doctor_text.indexOf(", addres"));
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		this.dob = dateFormat.parse(date_text);
+
+		this.address = doctor_text.substring(doctor_text.indexOf("address=") + 8, doctor_text.indexOf("]"));
+
 	}
 
 	public String getName() {
@@ -136,8 +154,8 @@ public class Doctor {
 
 	@Override
 	public String toString() {
-		return "\n Doctor [name=" + name + ", doctor_id=" + doctor_id + ", email=" + email + ", phone=" + phone
-				+ ", dob=" + dob + ", address=" + address + "]";
+		return "Doctor [name=" + name + ", doctor_id=" + doctor_id + ", email=" + email + ", phone=" + phone + ", dob="
+				+ dob + ", address=" + address + "]";
 	}
 
 	public String toStringForPatients() {

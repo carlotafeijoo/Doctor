@@ -110,9 +110,9 @@ public class Task {
 		return "Task [task_id=" + task_id + ", description=" + description + ", doctor_id=" + doctor_id + ", duration="
 				+ duration + ", elderly_id=" + elderly_id + "]";
 	}
-	
+
 	public String toStringtoElderly() {
-		return "Task: "+this.description + " Duration : "+ this.duration;
+		return "Task: " + this.description + " Duration : " + this.duration;
 	}
 
 }
