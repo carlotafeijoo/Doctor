@@ -64,7 +64,6 @@ public class Doctor {
 	// chuleta Doctor doctor = new Doctor(name, phone, dob, address, email);
 	//Doctor [name=Pepito, doctor_id=0, email=gmail, phone=34098, dob=0007-05-04, address=avenida]
 	public Doctor(String doctor_text) throws ParseException {
-		System.out.println(doctor_text.substring(doctor_text.indexOf("name=") + 5, doctor_text.indexOf(", doctor_id=")));
 		this.name = doctor_text.substring(doctor_text.indexOf("name=") + 5, doctor_text.indexOf(", doctor_id"));
 		this.doctor_id = Integer.parseInt(doctor_text.substring(doctor_text.indexOf("tor_id=") + 7, doctor_text.indexOf(", email")));
 		this.email = doctor_text.substring(doctor_text.indexOf("email=") + 6, doctor_text.indexOf(", phone"));

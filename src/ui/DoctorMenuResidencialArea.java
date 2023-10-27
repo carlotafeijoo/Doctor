@@ -25,7 +25,7 @@ public class DoctorMenuResidencialArea {
 
 		System.out.println("WELCOME TO THE RESIDENCIAL AREA DATA BASE");
 
-		Socket so = new Socket("localhost", 9009);
+		 so = new Socket("localhost", 9009);
 		// el cliente lee lineas pero tambien manda
 		br = new BufferedReader(new InputStreamReader(so.getInputStream()));
 		os = so.getOutputStream();
@@ -123,7 +123,8 @@ public class DoctorMenuResidencialArea {
 				case 2:
 					System.out.println("YOU HAVE EXIT THE RESIDENCIAL AREA DATA BASE");
 					releaseResources(pw, br, os, so);
-					System.exit(3);
+					
+					System.exit(2);
 					break;
 
 				default:
@@ -174,35 +175,25 @@ public class DoctorMenuResidencialArea {
 		String field = null;
 		int choice;
 		do {
-
-			System.out.println("1.Carer");
-			System.out.println("2.Cleaner");
-			System.out.println("3.Chef");
-			System.out.println("4.Animator");
+			
+			System.out.println("1.Cardiologist");
+			System.out.println("2.Generalist Physician");
 
 			choice = InputException.getInt("Chose field: ");
 			switch (choice) {
 
 			case 1:
-				field = "Carer";
+				field = "Cardiologist";
 				break;
 
 			case 2:
-				field = "Cleaner";
-				break;
-
-			case 3:
-				field = "Chef";
-				break;
-
-			case 4:
-				field = "Animator";
+				field = "Generalist Physician";
 				break;
 
 			default:
 				break;
 			}
-		} while (choice < 1 || choice > 4);
+		} while (choice < 1 || choice > 2);
 
 		String address = InputException.getString("Address: ");
 		String email = InputException.getString("Email: ");
@@ -238,15 +229,17 @@ public class DoctorMenuResidencialArea {
 
 	public static void logIn() throws Exception {
 
-		System.out.println("Username or dni without letter:");
+		System.out.println("Username :");
 		String username = read.readLine();
 		String password = InputException.getString("Password: ");
-		MessageDigest md = MessageDigest.getInstance("MD5");
-		md.update(password.getBytes());
-		byte[] digest = md.digest();
+		pw.println("checkPassword");
+		pw.println(username);
+		pw.println(password);
 
-		User u = null;// userManager.checkPassword(username, digest);
-
+		String role_text=br.readLine();
+		String user_text = br.readLine();
+		User u = new User(user_text);
+		u.setRole(new Role(role_text));
 		if (u == null) {
 			System.out.println("User not found");
 			mainMenu();
@@ -256,8 +249,16 @@ public class DoctorMenuResidencialArea {
 		if (u != null && u.getRole().getName().equals("Doctor")) {
 			Integer id = u.getId();
 			
-			int doctor_id = 0;// DoctorManager.searchDoctorIdfromUId(id);
-			Doctor doctor = null;// DoctorManager.searchDoctorbyId(doctor_id);
+			pw.println("searchDoctorIdfromUId");
+			pw.println(""+id);
+			String doctor_id_text=br.readLine();
+			int doctor_id=Integer.parseInt(doctor_id_text);
+
+			pw.println("searchDoctorbyId");
+			pw.println(doctor_id);
+			String doctor_text = br.readLine();
+			Doctor doctor = new Doctor(doctor_text);
+			
 			System.out.println(doctor);
 			System.out.println("Login successful!");
 			doctorMenu(u.getId());
@@ -281,8 +282,10 @@ public class DoctorMenuResidencialArea {
 				switch (choice) {
 
 				case 1:
+					
 					int doctor_id = 0;// DoctorManager.searchDoctorIdfromUId(User_id);
 					Doctor doctorToUpdate = null;// DoctorManager.searchDoctorbyId(doctor_id);
+					
 					if (doctorToUpdate != null) {
 						int newPhone = InputException.getInt("Enter your new phone number: ");
 						doctorToUpdate.setPhone(newPhone);
@@ -296,7 +299,10 @@ public class DoctorMenuResidencialArea {
 					break;
 
 				case 2:
-					int doctorToAssignNewTask_id = 0;// DoctorManager.searchDoctorIdfromUId(User_id);
+					int doctorToAssignNewTask_id = 0;
+					
+					
+					// DoctorManager.searchDoctorIdfromUId(User_id);
 					addTask(doctorToAssignNewTask_id);
 					System.out.println("Task added sucessfully!");
 					break;

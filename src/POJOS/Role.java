@@ -33,9 +33,16 @@ public class Role implements Serializable {
 		super();
 	}
 
-	public Role(String name) {
+	/*public Role(String name) {
 		super();
 		this.name = name;
+	}*/
+	
+	//"Role [id=" + id + ", name=" + name + "]"
+	public Role(String role_text) {
+		super();
+		this.id = Integer.parseInt(role_text.substring(role_text.indexOf("id=") + 3, role_text.indexOf(", name")));
+		this.name = role_text.substring(role_text.indexOf("name=") + 5, role_text.indexOf("]"));
 	}
 
 	public void removeUser(User u) {
@@ -98,4 +105,10 @@ public class Role implements Serializable {
 
 	}
 
+	@Override
+	public String toString() {
+		return "Role [id=" + id + ", name=" + name + "]";
+	}
+	
+	
 }

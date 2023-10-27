@@ -51,6 +51,14 @@ public class User implements Serializable {
 		this.username = username;
 		this.password = password;
 	}
+	
+	//"User [id=" + id + ", username=" + username + ", role=" + role + "]"
+	public User(String user_text) {
+		super();
+		this.id = Integer.parseInt(user_text.substring(user_text.indexOf("id=") + 3, user_text.indexOf(", username")));
+		this.username = user_text.substring(user_text.indexOf("username=") + 9, user_text.indexOf("]"));
+	
+	}
 
 	public Integer getId() {
 		return id;
@@ -109,5 +117,11 @@ public class User implements Serializable {
 		return Objects.equals(username, other.username) && Objects.equals(id, other.id)
 				&& Arrays.equals(password, other.password) && Objects.equals(role, other.role);
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", role=" + role + "]";
+	}
+	
 
 }

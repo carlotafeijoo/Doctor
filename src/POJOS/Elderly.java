@@ -57,7 +57,6 @@ public class Elderly implements Serializable {
 	//"Elderly [elderly_id=" + elderly_id + ", name=" + name + ", dni=" + dni + ", doctor_id=" + doctor_id
 	//+ ", dob=" + dob + "]";
 	public Elderly(String elderly_text) throws ParseException {
-		System.out.println(elderly_text.substring(elderly_text.indexOf("elderly_id=") +11, elderly_text.indexOf(", name=")));
 		this.elderly_id = Integer.parseInt(elderly_text.substring(elderly_text.indexOf("elderly_id=") +11, elderly_text.indexOf(", name")));
 		this.name = elderly_text.substring(elderly_text.indexOf("name=") + 5, elderly_text.indexOf(", dni"));		
 		this.dni = Integer.parseInt(elderly_text.substring(elderly_text.indexOf("dni=") +4, elderly_text.indexOf(", doctor_id")));
