@@ -17,6 +17,7 @@ public class Doctor {
 	private String address;
 	private List<Elderly> elderlies;
 
+
 	// Empty constructor
 	public Doctor() {
 		super();
@@ -64,7 +65,6 @@ public class Doctor {
 	// chuleta Doctor doctor = new Doctor(name, phone, dob, address, email);
 	//Doctor [name=Pepito, doctor_id=0, email=gmail, phone=34098, dob=0007-05-04, address=avenida]
 	public Doctor(String doctor_text) throws ParseException {
-		
 		this.name = doctor_text.substring(doctor_text.indexOf("name=") + 5, doctor_text.indexOf(", doctor_id"));
 		this.doctor_id = Integer.parseInt(doctor_text.substring(doctor_text.indexOf("tor_id=") + 7, doctor_text.indexOf(", email")));
 		this.email = doctor_text.substring(doctor_text.indexOf("email=") + 6, doctor_text.indexOf(", phone"));
@@ -154,8 +154,9 @@ public class Doctor {
 
 	@Override
 	public String toString() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		return "Doctor [name=" + name + ", doctor_id=" + doctor_id + ", email=" + email + ", phone=" + phone + ", dob="
-				+ dob + ", address=" + address + "]";
+				+ dateFormat.format(dob) + ", address=" + address + "]";
 	}
 
 	public String toStringForPatients() {

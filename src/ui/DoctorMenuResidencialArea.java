@@ -306,6 +306,17 @@ public class DoctorMenuResidencialArea {
 							doctorToUpdate.setPhone(newPhone);
 							String newAddress = InputException.getString("Enter your new address: ");
 							doctorToUpdate.setAddress(newAddress);
+							System.out.println("Enter the year of birth:");
+							int year = Integer.parseInt(read.readLine());
+							System.out.println("Enter the month of birth:");
+							int month = Integer.parseInt(read.readLine());
+							System.out.println("Enter the day of birth:");
+							int day = Integer.parseInt(read.readLine());
+							SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+							String dobStr = String.format("%04d-%02d-%02d", year, month, day);
+							java.util.Date utilDate = dateFormat.parse(dobStr);
+							java.sql.Date dob = new java.sql.Date(utilDate.getTime());
+							doctorToUpdate.setDob(dob);
 							
 							pw.println("updateDoctorMemberInfo");
 							pw.println(doctorToUpdate.toString());
