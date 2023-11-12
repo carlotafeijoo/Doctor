@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 import exceptions.InputException;
 import POJOS.*;
 
@@ -25,7 +26,7 @@ public class DoctorMenuResidencialArea {
 
 		System.out.println("WELCOME TO THE RESIDENCIAL AREA DATA BASE");
 
-		 so = new Socket("localhost", 9009);
+		so = new Socket("localhost", 9009);
 		// el cliente lee lineas pero tambien manda
 		br = new BufferedReader(new InputStreamReader(so.getInputStream()));
 		os = so.getOutputStream();
@@ -231,8 +232,10 @@ public class DoctorMenuResidencialArea {
 
 		System.out.println("Username :");
 		String username = read.readLine();
+		
 		String password = InputException.getString("Password: ");
 		pw.println("checkPassword");
+		
 		pw.println(username);
 		pw.println(password);
 
@@ -240,6 +243,7 @@ public class DoctorMenuResidencialArea {
 		String user_text = br.readLine();
 		User u = new User(user_text);
 		u.setRole(new Role(role_text));
+		
 		if (u == null) {
 			System.out.println("User not found");
 			mainMenu();
@@ -282,19 +286,33 @@ public class DoctorMenuResidencialArea {
 				switch (choice) {
 
 				case 1:
+					try {
+						pw.println("searchDoctorIdfromUId");
+						pw.println(User_id);
+						String doctor_id_string = br.readLine();
+						int doctor_id = Integer.parseInt(doctor_id_string);
+
+						pw.println("searchDoctorbyId");
+						pw.println(doctor_id);
+						String doctor_string = br.readLine();
+						Doctor doctorToUpdate = new Doctor(doctor_string);
 					
-					int doctor_id = 0;// DoctorManager.searchDoctorIdfromUId(User_id);
-					Doctor doctorToUpdate = null;// DoctorManager.searchDoctorbyId(doctor_id);
-					
-					if (doctorToUpdate != null) {
-						int newPhone = InputException.getInt("Enter your new phone number: ");
-						doctorToUpdate.setPhone(newPhone);
-						String newAddress = InputException.getString("Enter your new address: ");
-						doctorToUpdate.setAddress(newAddress);
-						// DoctorManager.updateDoctorMemberInfo(doctorToUpdate);
-						System.out.println("Information updated successfully! ");
-					} else {
-						System.out.println("doctor update fail.");
+						if (doctorToUpdate != null) {
+							
+							int newPhone = InputException.getInt("Enter your new phone number: ");
+							doctorToUpdate.setPhone(newPhone);
+							String newAddress = InputException.getString("Enter your new address: ");
+							doctorToUpdate.setAddress(newAddress);
+							
+							pw.println("updateDoctorMemberInfo");
+							pw.println(doctorToUpdate.toString());
+							
+							System.out.println("Information updated successfully! ");
+						} else {
+							System.out.println("Doctor not found");
+						}
+					}catch (ParseException pe) {
+						System.out.println("Input format error when updating Doctor" + pe);
 					}
 					break;
 
