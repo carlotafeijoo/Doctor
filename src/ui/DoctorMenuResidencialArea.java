@@ -340,8 +340,17 @@ public class DoctorMenuResidencialArea {
 					break;
 
 				case 3:
-					int doctorAllTask_id = 0;// DoctorManager.searchDoctorIdfromUId(User_id);
-					List<Task> tasksList = null;// tasksManager.getListOfTasks(doctorAllTask_id);
+					//int doctorAllTask_id = 0;// DoctorManager.searchDoctorIdfromUId(User_id);
+					pw.println("searchDoctorIdfromUId"); //find id doctor from User id
+					pw.println(User_id);
+					String doctor_id_string = br.readLine();
+					int doctor_id = Integer.parseInt(doctor_id_string);
+					
+					
+					//List<Task> tasksList = null;// tasksManager.getListOfTasks(doctorAllTask_id);
+					pw.println("getListOfTasks"); //find list task from doctor id
+					pw.println(doctor_id);
+					String tasksList = br.readLine();
 					System.out.println("List of tasks: " + tasksList);
 					break;
 
