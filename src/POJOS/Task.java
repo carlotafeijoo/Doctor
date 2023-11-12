@@ -47,6 +47,17 @@ public class Task {
 		this.doctor_id = duration;
 	}
 
+	//AÑADIDO POR MARI (SUPONGO QUE ESTARA BIEN)
+	//"Task [task_id=" + task_id + ", description=" + description + ", doctor_id=" + doctor_id + ", duration="
+	//+ duration + ", elderly_id=" + elderly_id + "]"
+	public Task (String task_string) {
+		this.task_id = Integer.parseInt(task_string.substring(task_string.indexOf("task_id=") +8, task_string.indexOf(", description")));
+		this.description = task_string.substring(task_string.indexOf("description=") + 12, task_string.indexOf(", doctor_id"));
+		this.doctor_id = Integer.parseInt(task_string.substring(task_string.indexOf("doctor_id=") +10, task_string.indexOf(", duration")));
+		this.duration = Integer.parseInt(task_string.substring(task_string.indexOf("duration=") +9, task_string.indexOf  (", elderly_id")));
+		this.elderly_id = Integer.parseInt(task_string.substring(task_string.indexOf("elderly_id=") +11, task_string.indexOf("]")));
+	}
+	
 	public int getTask_id() {
 		return task_id;
 	}

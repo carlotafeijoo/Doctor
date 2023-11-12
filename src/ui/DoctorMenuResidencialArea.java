@@ -285,7 +285,7 @@ public class DoctorMenuResidencialArea {
 
 				switch (choice) {
 
-				case 1:
+				case 1:	//UPDATE INFORMATION
 					try {
 						pw.println("searchDoctorIdfromUId");
 						pw.println(User_id);
@@ -330,16 +330,17 @@ public class DoctorMenuResidencialArea {
 					}
 					break;
 
-				case 2:
-					int doctorToAssignNewTask_id = 0;
+				case 2:	//REGISTER NEW TASK
+					pw.println("searchDoctorIdfromUId");
+					pw.println(User_id);
+					String doctorId_string = br.readLine();
+					int doctorToAssignNewTask_id = Integer.parseInt(doctorId_string);
 					
-					
-					// DoctorManager.searchDoctorIdfromUId(User_id);
 					addTask(doctorToAssignNewTask_id);
 					System.out.println("Task added sucessfully!");
 					break;
 
-				case 3:
+				case 3:	//LIST ALL THE TASKS
 					//int doctorAllTask_id = 0;// DoctorManager.searchDoctorIdfromUId(User_id);
 					pw.println("searchDoctorIdfromUId"); //find id doctor from User id
 					pw.println(User_id);
@@ -372,18 +373,33 @@ public class DoctorMenuResidencialArea {
 	public static void addTask(int doctorToAssignNewTask_id) throws Exception {
 
 		System.out.println("Input the information of the new task: ");
-
 		String description = InputException.getString("Description: ");
 
 		// print all elderlies of this doctor
-		List<Elderly> elderlies = null;// elderlyManager.getListOfElderlyByDoctorID(doctorToAssignNewTask_id);
-		for (int i = 0; i < elderlies.size(); i++) {
-			System.out.println(elderlies.get(i).toString() + "\n");
+		pw.println("getListOfElderlyByDoctorID");
+		pw.println(doctorToAssignNewTask_id);
+		
+		ArrayList <Elderly> elderlies = new ArrayList<>();
+		String cantidad_elderlies_string = br.readLine();
+		int cantidad_elderlies=Integer.parseInt(cantidad_elderlies_string);
+		
+		for(int i = 0; i < cantidad_elderlies; i++) {			
+			String elderly_string = br.readLine();
+			Elderly elderly = new Elderly(elderly_string);
+			elderlies.add(elderly);			
 		}
+		
 		int elderly_id = InputException.getInt("Elderly id: ");
 		int duration = InputException.getInt("Duration: ");
 		Task task = new Task(description, doctorToAssignNewTask_id, duration, elderly_id);
+		
 		// tasksManager.addTask(task);
+		pw.println("addTask");
+		pw.println(task);
+		
+		br.readLine();
+		
+		
 	}
 
 }
