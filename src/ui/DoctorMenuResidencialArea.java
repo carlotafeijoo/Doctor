@@ -291,6 +291,9 @@ public class DoctorMenuResidencialArea {
 						pw.println(User_id);
 						String doctor_id_string = br.readLine();
 						int doctor_id = Integer.parseInt(doctor_id_string);
+						//en vez de crear un obejto doctor nuevo con todos los datos de ese doctor que queremos actualizar 
+						//podríamos simplemente pasa por el socket desde el cliente los datos que queremos actualizar con la id del doctor 
+						//y una vez tengamos esos datos en el server actualizar directamente los datos de la db de ese doctor
 
 						pw.println("searchDoctorbyId");
 						pw.println(doctor_id);
