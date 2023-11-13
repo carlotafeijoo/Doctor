@@ -348,11 +348,26 @@ public class DoctorMenuResidencialArea {
 					int doctor_id = Integer.parseInt(doctor_id_string);
 					
 					
+					List <Elderly> elderlies = getListOfElderlyByDoctorID(doctor_id);
+					System.out.println(elderlies);
+					//poner bonito
+					int elderly_id = InputException.getInt("Elderly id to see the tasks: ");
+					
 					//List<Task> tasksList = null;// tasksManager.getListOfTasks(doctorAllTask_id);
-					pw.println("getListOfTasks"); //find list task from doctor id
+					pw.println("getListOfTasksByDoctorFromElder"); //find list task from doctor id
 					pw.println(doctor_id);
-					String tasksList = br.readLine();
-					System.out.println("List of tasks: " + tasksList);
+					pw.println(elderly_id);
+					
+					ArrayList <Task> tasks = new ArrayList<>();
+					String cantidad_tasks_text=br.readLine();
+					int cantidad_tasks=Integer.parseInt(cantidad_tasks_text);
+					for(int i = 0; i < cantidad_tasks; i++) {
+						
+						String tasks_text=br.readLine();
+						Task task=new Task(tasks_text);
+						tasks.add(task);
+					}
+					System.out.println("List of tasks: " + tasks);
 					break;
 
 				case 4:
@@ -376,19 +391,10 @@ public class DoctorMenuResidencialArea {
 		String description = InputException.getString("Description: ");
 
 		// print all elderlies of this doctor
-		pw.println("getListOfElderlyByDoctorID");
-		pw.println(doctorToAssignNewTask_id);
 		
-		ArrayList <Elderly> elderlies = new ArrayList<>();
-		String cantidad_elderlies_string = br.readLine();
-		int cantidad_elderlies=Integer.parseInt(cantidad_elderlies_string);
-		
-		for(int i = 0; i < cantidad_elderlies; i++) {			
-			String elderly_string = br.readLine();
-			Elderly elderly = new Elderly(elderly_string);
-			elderlies.add(elderly);			
-		}
-		
+		List <Elderly> elderlies = getListOfElderlyByDoctorID(doctorToAssignNewTask_id);
+		System.out.println(elderlies);
+		//poner bonito
 		int elderly_id = InputException.getInt("Elderly id: ");
 		int duration = InputException.getInt("Duration: ");
 		Task task = new Task(description, doctorToAssignNewTask_id, duration, elderly_id);
@@ -401,5 +407,19 @@ public class DoctorMenuResidencialArea {
 		
 		
 	}
-
+	public static List <Elderly> getListOfElderlyByDoctorID(int doctor_id) throws Exception {
+		pw.println("getListOfElderlyByDoctorID");
+		pw.println(doctor_id);
+		ArrayList <Elderly>elderlies = new ArrayList<>();
+		String cantidad_elderlies_text=br.readLine();
+		int cantidad_elderlies=Integer.parseInt(cantidad_elderlies_text);
+		for(int i = 0; i < cantidad_elderlies; i++) {
+			
+			String elderly_text=br.readLine();
+			Elderly elderly=new Elderly(elderly_text);
+			elderlies.add(elderly);
+			
+		}
+		return elderlies;
+	}
 }
