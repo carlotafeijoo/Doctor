@@ -21,7 +21,7 @@ public class Doctor {
 	// Empty constructor
 	public Doctor() {
 		super();
-		elderlies = new ArrayList<Elderly>();
+		elderlies = new ArrayList<>();
 	}
 
 	// Constructor with all the class Task´s attributes as parameters
@@ -144,9 +144,7 @@ public class Doctor {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		Doctor other = (Doctor) obj;
 		return Objects.equals(name, other.name);

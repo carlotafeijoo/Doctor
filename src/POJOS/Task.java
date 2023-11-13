@@ -47,6 +47,7 @@ public class Task {
 		this.doctor_id = duration;
 	}
 
+
 	//AÑADIDO POR MARI (SUPONGO QUE ESTARA BIEN)
 	//"Task [task_id=" + task_id + ", description=" + description + ", doctor_id=" + doctor_id + ", duration="
 	//+ duration + ", elderly_id=" + elderly_id + "]"
@@ -57,7 +58,8 @@ public class Task {
 		this.duration = Integer.parseInt(task_string.substring(task_string.indexOf("duration=") +9, task_string.indexOf  (", elderly_id")));
 		this.elderly_id = Integer.parseInt(task_string.substring(task_string.indexOf("elderly_id=") +11, task_string.indexOf("]")));
 	}
-	
+
+
 	public int getTask_id() {
 		return task_id;
 	}
@@ -108,9 +110,7 @@ public class Task {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		Task other = (Task) obj;
 		return Objects.equals(description, other.description);

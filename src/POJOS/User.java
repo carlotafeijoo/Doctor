@@ -19,7 +19,7 @@ import javax.persistence.TableGenerator;
 public class User implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 2078397574496562875L;
 
@@ -51,13 +51,13 @@ public class User implements Serializable {
 		this.username = username;
 		this.password = password;
 	}
-	
+
 	//"User [id=" + id + ", username=" + username + ", role=" + role + "]"
 	public User(String user_text) {
 		super();
 		this.id = Integer.parseInt(user_text.substring(user_text.indexOf("id=") + 3, user_text.indexOf(", username")));
 		this.username = user_text.substring(user_text.indexOf("username=") + 9, user_text.indexOf("]"));
-	
+
 	}
 
 	public Integer getId() {
@@ -109,9 +109,7 @@ public class User implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		User other = (User) obj;
 		return Objects.equals(username, other.username) && Objects.equals(id, other.id)
@@ -122,6 +120,6 @@ public class User implements Serializable {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", role=" + role + "]";
 	}
-	
+
 
 }

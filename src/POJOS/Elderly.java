@@ -53,12 +53,12 @@ public class Elderly implements Serializable {
 		this.name = name;
 		this.dob = dob;
 	}
-	
+
 	//"Elderly [elderly_id=" + elderly_id + ", name=" + name + ", dni=" + dni + ", doctor_id=" + doctor_id
 	//+ ", dob=" + dob + "]";
 	public Elderly(String elderly_text) throws ParseException {
 		this.elderly_id = Integer.parseInt(elderly_text.substring(elderly_text.indexOf("elderly_id=") +11, elderly_text.indexOf(", name")));
-		this.name = elderly_text.substring(elderly_text.indexOf("name=") + 5, elderly_text.indexOf(", dni"));		
+		this.name = elderly_text.substring(elderly_text.indexOf("name=") + 5, elderly_text.indexOf(", dni"));
 		this.dni = Integer.parseInt(elderly_text.substring(elderly_text.indexOf("dni=") +4, elderly_text.indexOf(", doctor_id")));
 		this.doctor_id = Integer.parseInt(elderly_text.substring(elderly_text.indexOf("doctor_id=") +10, elderly_text.indexOf(", dob")));
 
@@ -107,8 +107,9 @@ public class Elderly implements Serializable {
 
 	@Override
 	public String toString() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		return "Elderly [elderly_id=" + elderly_id + ", name=" + name + ", dni=" + dni + ", doctor_id=" + doctor_id
-				+ ", dob=" + dob + "]";
+				+ ", dob=" + dateFormat.format(dob) + "]";
 	}
 
 	public int getDni() {
@@ -136,9 +137,7 @@ public class Elderly implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		Elderly other = (Elderly) obj;
 		return dob == other.dob && elderly_id == other.elderly_id && Objects.equals(name, other.name);

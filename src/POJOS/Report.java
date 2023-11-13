@@ -21,8 +21,8 @@ public class Report {
 		this.task_id = task_id;
 		this.elderly_id = elderly_id;
 	}
-	
-	
+
+
 	public int getReport_id() {
 		return report_id;
 	}
@@ -54,8 +54,8 @@ public class Report {
 	public void setElderly_id(int elderly_id) {
 		this.elderly_id = elderly_id;
 	}
-	
-	
+
+
 
 	@Override
 	public int hashCode() {
@@ -66,16 +66,14 @@ public class Report {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		Report other = (Report) obj;
 		return elderly_id == other.elderly_id && Objects.equals(file_name, other.file_name)
 				&& report_id == other.report_id && task_id == other.task_id;
 	}
-	
-	
+
+
 
 	@Override
 	public String toString() {
@@ -89,5 +87,5 @@ public class Report {
 		this.task_id = Integer.parseInt(report_string.substring(report_string.indexOf("task_id=") +10, report_string.indexOf(", elderly_id")));
 		this.elderly_id = Integer.parseInt(report_string.substring(report_string.indexOf("elderly_id=") +11, report_string.indexOf("]")));
 	}
-	
+
 }
