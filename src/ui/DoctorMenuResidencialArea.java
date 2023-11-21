@@ -351,6 +351,7 @@ public class DoctorMenuResidencialArea {
 					List <Elderly> elderlies = getListOfElderlyByDoctorID(doctor_id);
 					System.out.println(elderlies);
 					//poner bonito
+					//TODO Que no pueda meter cualquier elderly id , solo las id asociadas a ese doctor
 					int elderly_id = InputException.getInt("Elderly id to see the tasks: ");
 					
 					//List<Task> tasksList = null;// tasksManager.getListOfTasks(doctorAllTask_id);
@@ -394,7 +395,7 @@ public class DoctorMenuResidencialArea {
 		
 		List <Elderly> elderlies = getListOfElderlyByDoctorID(doctorToAssignNewTask_id);
 		System.out.println(elderlies);
-		//poner bonito
+		//TODO Que no pueda meter cualquier elderly id , solo las id asociadas a ese doctor
 		int elderly_id = InputException.getInt("Elderly id: ");
 		int duration = InputException.getInt("Duration: ");
 		Task task = new Task(description, doctorToAssignNewTask_id, duration, elderly_id);
