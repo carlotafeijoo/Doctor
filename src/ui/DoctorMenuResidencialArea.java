@@ -21,6 +21,7 @@ public class DoctorMenuResidencialArea {
 	static BufferedReader br = null;
 	static Socket so = null;
 	private static BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
+	//consola
 
 	public static void main(String[] args) throws IOException {
 
@@ -28,7 +29,7 @@ public class DoctorMenuResidencialArea {
 
 		so = new Socket("localhost", 9009);
 		// el cliente lee lineas pero tambien manda
-		br = new BufferedReader(new InputStreamReader(so.getInputStream()));
+		br = new BufferedReader(new InputStreamReader(so.getInputStream())); //sockets cliente
 		os = so.getOutputStream();
 		pw = new PrintWriter(os, true);
 
@@ -230,8 +231,8 @@ public class DoctorMenuResidencialArea {
 
 	public static void logIn() throws Exception {
 
-		System.out.println("Username :");
-		String username = read.readLine();
+		
+		String username = InputException.getString("Username: ");
 		
 		String password = InputException.getString("Password: ");
 		pw.println("checkPassword");
@@ -241,9 +242,11 @@ public class DoctorMenuResidencialArea {
 
 		String role_text=br.readLine();
 		String user_text = br.readLine();
+		
 		User u = new User(user_text);
 		u.setRole(new Role(role_text));
 		
+		//TODO checkear esto: es null? es vacio? hay que mover el if?
 		if (u == null) {
 			System.out.println("User not found");
 			mainMenu();
@@ -329,6 +332,7 @@ public class DoctorMenuResidencialArea {
 						System.out.println("Input format error when updating Doctor" + pe);
 					}
 					break;
+					
 
 				case 2:	//REGISTER NEW TASK
 					pw.println("searchDoctorIdfromUId");
