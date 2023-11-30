@@ -16,7 +16,10 @@ public class Elderly implements Serializable {
 	private int dni;
 	private int doctor_id;
 	private Date dob;
+	private List<String> symptoms;
 	private List<Doctor> doctor_list;
+	private List<Task> task_list;
+
 
 	public Elderly() {
 		super();
@@ -55,7 +58,10 @@ public class Elderly implements Serializable {
 	}
 
 	//"Elderly [elderly_id=" + elderly_id + ", name=" + name + ", dni=" + dni + ", doctor_id=" + doctor_id
-	//+ ", dob=" + dob + "]";
+	//+ ", dob=" + dob + ", ]";
+	
+	
+	
 	public Elderly(String elderly_text) throws ParseException {
 		this.elderly_id = Integer.parseInt(elderly_text.substring(elderly_text.indexOf("elderly_id=") +11, elderly_text.indexOf(", name")));
 		this.name = elderly_text.substring(elderly_text.indexOf("name=") + 5, elderly_text.indexOf(", dni"));
@@ -68,6 +74,18 @@ public class Elderly implements Serializable {
 
 	}
 
+
+	public Elderly(int elderly_id, String name, int dni, int doctor_id, Date dob, List<String> symptoms,
+			List<Doctor> doctor_list) {
+		super();
+		this.elderly_id = elderly_id;
+		this.name = name;
+		this.dni = dni;
+		this.doctor_id = doctor_id;
+		this.dob = dob;
+		this.symptoms = symptoms;
+		this.doctor_list = doctor_list;
+	}
 
 	public int getElderly_id() {
 		return elderly_id;
@@ -124,6 +142,14 @@ public class Elderly implements Serializable {
 	public int hashCode() {
 		return Objects.hash(elderly_id);
 	}
+	
+	public List<String> getSymptoms() {
+		return symptoms;
+	}
+
+	public void setSymptoms(List<String> symptoms) {
+		this.symptoms = symptoms;
+	}
 
 	public int getDoctor_id() {
 		return doctor_id;
@@ -133,6 +159,14 @@ public class Elderly implements Serializable {
 		this.doctor_id = doctor_id;
 	}
 
+	public List<Task> getTask_list() {
+		return task_list;
+	}
+
+	public void setTask_list(List<Task> task_list) {
+		this.task_list = task_list;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
