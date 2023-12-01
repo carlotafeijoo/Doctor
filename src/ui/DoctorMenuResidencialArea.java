@@ -124,6 +124,7 @@ public class DoctorMenuResidencialArea {
 
 				case 2:
 					System.out.println("YOU HAVE EXIT THE RESIDENCIAL AREA DATA BASE");
+					pw.println("stop");
 					releaseResources(pw, br, os, so);
 					
 					System.exit(2);
