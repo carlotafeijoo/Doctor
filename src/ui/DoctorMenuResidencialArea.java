@@ -35,54 +35,6 @@ public class DoctorMenuResidencialArea {
 
 		mainMenu();
 
-		// ejemplo sockets diapo 27
-		/*
-		 * Socket so=null; System.out.println("CLIENTE");
-		 * 
-		 * try { so = new Socket ("localhost", 9009); } catch (IOException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); }
-		 * 
-		 * BufferedReader br = new BufferedReader(new
-		 * InputStreamReader(so.getInputStream())); String line = br.readLine();
-		 * System.out.println(line);
-		 * 
-		 * OutputStream os = so.getOutputStream(); PrintWriter pw = new PrintWriter(os,
-		 * true); pw.println("hola"); pw.println("carlota"); pw.println("stop");
-		 * pw.println("adios");
-		 * 
-		 * releaseResources(pw, os, so);
-		 */
-
-		// probando con doctores
-		/*
-		 * System.out.println("Enter the year of birth:");
-		 * 
-		 * int year = Integer.parseInt(read.readLine());
-		 * 
-		 * System.out.println("Enter the month of birth:"); int month =
-		 * Integer.parseInt(read.readLine());
-		 * 
-		 * System.out.println("Enter the day of birth:"); int day =
-		 * Integer.parseInt(read.readLine()); SimpleDateFormat dateFormat = new
-		 * SimpleDateFormat("yyyy/MM/dd");
-		 * 
-		 * String dobStr = String.format("%04d/%02d/%02d", year, month, day);
-		 * java.util.Date utilDate; try { utilDate = dateFormat.parse(dobStr);
-		 * 
-		 * java.sql.Date dob = new java.sql.Date(utilDate.getTime()); Doctor doctor =
-		 * new Doctor("Paloma", 34656, dob, "avenida", "gmail");
-		 * 
-		 * os = so.getOutputStream(); pw = new PrintWriter(os, true);
-		 * 
-		 * pw.println("addDoctor"); pw.println(""+doctor.toString());
-		 * 
-		 * //recibo linea para saber si se ha hecho BufferedReader br = new
-		 * BufferedReader(new InputStreamReader(so.getInputStream())); String line =
-		 * br.readLine(); System.out.println(line); pw.println("stop");
-		 * 
-		 * } catch (ParseException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); }
-		 */
 	}
 
 	private static void releaseResources(PrintWriter printWriter, BufferedReader br, OutputStream outputStream,
