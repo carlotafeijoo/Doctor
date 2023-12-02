@@ -189,8 +189,8 @@ public class DoctorMenuResidencialArea {
 		
 		String password = InputException.getString("Password: ");
 		
-		User u1 = null;
-		System.out.println("User null " +u1.toString());
+		/*User u1 = null;
+		System.out.println("User null " +u1.toString());*/
 		
 		pw.println("checkPassword");
 		
