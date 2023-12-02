@@ -188,6 +188,10 @@ public class DoctorMenuResidencialArea {
 		String username = InputException.getString("Username: ");
 		
 		String password = InputException.getString("Password: ");
+		
+		User u1 = null;
+		System.out.println("User null " +u1.toString());
+		
 		pw.println("checkPassword");
 		
 		pw.println(username);
@@ -196,8 +200,19 @@ public class DoctorMenuResidencialArea {
 		String role_text=br.readLine();
 		String user_text = br.readLine();
 		
+		
+		
 		User u = new User(user_text);
 		u.setRole(new Role(role_text));
+		
+		/*if(u.getUsername()=="error") {
+			u = null;
+			System.out.println("User not found");
+			mainMenu();
+		}else if(u.getUsername()!="error"){
+			//u = new User(user_text);
+			u.setRole(new Role(role_text));
+		}*/
 		
 		//TODO checkear esto: es null? es vacio? hay que mover el if?
 		if (u == null) {
