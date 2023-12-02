@@ -177,8 +177,8 @@ public class DoctorMenuResidencialArea {
 		pw.println(username);
 		pw.println(password);
 		pw.println(doctor.toString());
-
-		br.readLine();
+		System.out.println(	br.readLine());
+	
 
 	}
 
