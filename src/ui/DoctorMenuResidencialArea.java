@@ -184,26 +184,35 @@ public class DoctorMenuResidencialArea {
 
 	public static void logIn() throws Exception {
 
-		
 		String username = InputException.getString("Username: ");
-		
 		String password = InputException.getString("Password: ");
-		pw.println("checkPassword");
 		
+		pw.println("checkPassword");
 		pw.println(username);
 		pw.println(password);
 
 		String role_text=br.readLine();
 		String user_text = br.readLine();
 		
-		User u = new User(user_text);
+		User u = null;
+
+		if(user_text.equalsIgnoreCase("error")) {
+			System.out.println("User not found");
+			mainMenu();
+		}
+		else {
+			u = new User(user_text);
+			u.setRole(new Role(role_text));
+		}
+		
+		/*User u = new User(user_text);
 		u.setRole(new Role(role_text));
 		
 		//TODO checkear esto: es null? es vacio? hay que mover el if?
 		if (u == null) {
 			System.out.println("User not found");
 			mainMenu();
-		}
+		}*/
 
 		// depending on the type of user we open a different menu
 		if (u != null && u.getRole().getName().equals("Doctor")) {
