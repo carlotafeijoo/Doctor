@@ -294,7 +294,6 @@ public class DoctorMenuResidencialArea {
 					int doctorToAssignNewTask_id = Integer.parseInt(doctorId_string);
 					
 					addTask(doctorToAssignNewTask_id);
-					System.out.println("Task added sucessfully!");
 					break;
 
 				case 3:	//LIST ALL THE TASKS
@@ -307,27 +306,37 @@ public class DoctorMenuResidencialArea {
 					
 					List <Elderly> elderlies = getListOfElderlyByDoctorID(doctor_id);
 					System.out.println(elderlies);
-					//poner bonito
-					//TODO Que no pueda meter cualquier elderly id , solo las id asociadas a ese doctor
 					int elderly_id = InputException.getInt("Elderly id to see the tasks: ");
 					
+					if(elderlies.isEmpty()==true){
+						System.out.println("Sorry, you dont have any pattient associated in this moment");
+						break;
+					}else if(checklist(elderly_id,elderlies)== true){
 					//List<Task> tasksList = null;// tasksManager.getListOfTasks(doctorAllTask_id);
-					pw.println("getListOfTasksByDoctorFromElder"); //find list task from doctor id
-					pw.println(doctor_id);
-					pw.println(elderly_id);
-					
-					ArrayList <Task> tasks = new ArrayList<>();
-					String cantidad_tasks_text=br.readLine();
-					int cantidad_tasks=Integer.parseInt(cantidad_tasks_text);
-					for(int i = 0; i < cantidad_tasks; i++) {
+						pw.println("getListOfTasksByDoctorFromElder"); //find list task from doctor id
+						pw.println(doctor_id);
+						pw.println(elderly_id);
 						
-						String tasks_text=br.readLine();
-						Task task=new Task(tasks_text);
-						tasks.add(task);
+						ArrayList <Task> tasks = new ArrayList<>();
+						String cantidad_tasks_text=br.readLine();
+						int cantidad_tasks=Integer.parseInt(cantidad_tasks_text);
+						for(int i = 0; i < cantidad_tasks; i++) {
+							
+							String tasks_text=br.readLine();
+							Task task=new Task(tasks_text);
+							tasks.add(task);
+						}
+						if(tasks.isEmpty()==true) {
+							System.out.println("Sorry, for this moment this patient doesnt have any associated task");
+							break;
+						}else{
+							System.out.println("List of tasks: " + tasks);
+							break;
+						}	
+					}else {	
+						System.out.println("Sorry, this id does not correspond to that of any of your associated patients");
+						break;
 					}
-					System.out.println("List of tasks: " + tasks);
-					break;
-
 				case 4:
 					mainMenu();
 					break;
@@ -352,17 +361,24 @@ public class DoctorMenuResidencialArea {
 		
 		List <Elderly> elderlies = getListOfElderlyByDoctorID(doctorToAssignNewTask_id);
 		System.out.println(elderlies);
-		//TODO Que no pueda meter cualquier elderly id , solo las id asociadas a ese doctor
 		int elderly_id = InputException.getInt("Elderly id: ");
 		int duration = InputException.getInt("Duration: ");
-		Task task = new Task(description, doctorToAssignNewTask_id, duration, elderly_id);
+		if(elderlies.isEmpty()==true){
+			System.out.println("Sorry, you dont have any pattient associated in this moment");
+		}else if(checklist(elderly_id,elderlies)== true){
+			Task task = new Task(description, doctorToAssignNewTask_id, duration, elderly_id);
+			pw.println("addTask");
+			pw.println(task);
+			br.readLine();
+			System.out.println("Task added sucessfully!");
+		}else {	
+			System.out.println("Sorry, this id does not correspond to that of any of your associated patients");
+	
+		}
+		
 		
 		// tasksManager.addTask(task);
-		pw.println("addTask");
-		pw.println(task);
-		
-		br.readLine();
-		
+				
 		
 	}
 	public static List <Elderly> getListOfElderlyByDoctorID(int doctor_id) throws Exception {
@@ -379,5 +395,14 @@ public class DoctorMenuResidencialArea {
 			
 		}
 		return elderlies;
+	}
+	public static boolean checklist(int eld_id,  List <Elderly> elder) {
+		boolean check= false;
+		for (int i=0; i < elder.size();i++ ) {
+			if (elder.get(i).getElderly_id() == eld_id) {
+				check = true;
+			}
+		}
+		return check;
 	}
 }
