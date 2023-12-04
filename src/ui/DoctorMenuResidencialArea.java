@@ -162,7 +162,11 @@ public class DoctorMenuResidencialArea {
 
 		System.out.println("Enter the day of birth:");
 		int day = Integer.parseInt(read.readLine());
-
+		
+		if (checkDate(year, month, day)==false) {
+			System.out.println("Sorry your date of birth is worng, try again \n");
+			
+		}else {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String dobStr = String.format("%04d-%02d-%02d", year, month, day);
 		java.util.Date utilDate = dateFormat.parse(dobStr);
@@ -179,7 +183,7 @@ public class DoctorMenuResidencialArea {
 		pw.println(doctor.toString());
 		System.out.println(	br.readLine());
 	
-
+		}
 	}
 
 	public static void logIn() throws Exception {
@@ -417,4 +421,33 @@ public class DoctorMenuResidencialArea {
 		}
 		return check;
 	}
+	public static boolean checkDate(int year, int month, int day) {
+	    if (year < 1900 || year > 2024) {
+	        return false;
+	    }
+	    if (month < 1 || month > 12) {
+	        return false;
+	    }
+	    if (day < 1 || day > 31) {
+	        return false;
+	    }
+	    if (month == 2) {
+	        if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+	            if (day > 29) {
+	                return false;
+	            }
+	        } else {
+	            if (day > 28) {
+	                return false;
+	            }
+	        }
+	    }
+	    else if (month == 4 || month == 6 || month == 9 || month == 11) {
+	        if (day > 30) {
+	            return false;
+	        }
+	    }
+	    return true;
+	}
+	
 }
