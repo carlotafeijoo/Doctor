@@ -251,7 +251,8 @@ public class DoctorMenuResidencialArea {
 				System.out.println("1.Update information. ");
 				System.out.println("2.Register new task. ");
 				System.out.println("3.List all the tasks. ");
-				System.out.println("4.Back.  ");
+				System.out.println("4.See patient report. ");
+				System.out.println("5.Back.  ");
 
 				choice = InputException.getInt("Introduce your choice: ");
 
@@ -353,7 +354,48 @@ public class DoctorMenuResidencialArea {
 						System.out.println("Sorry, this id does not correspond to that of any of your associated patients");
 						break;
 					}
-				case 4:
+				case 4:	//LIST ALL THE REPORTS
+					//int doctorAllTask_id = 0;// DoctorManager.searchDoctorIdfromUId(User_id);
+					pw.println("searchDoctorIdfromUId"); //find id doctor from User id
+					pw.println(User_id);
+					String doctor_id_string2 = br.readLine();
+					int doctor_id2 = Integer.parseInt(doctor_id_string2);
+					
+					
+					List <Elderly> elderlies2 = getListOfElderlyByDoctorID(doctor_id2);
+					System.out.println(elderlies2);
+					int elderly_id2 = InputException.getInt("Elderly id to see the reports: ");
+					
+					if(elderlies2.isEmpty()==true){
+						System.out.println("Sorry, you dont have any pattient associated in this moment");
+						break;
+					}else if(checklist(elderly_id2,elderlies2)== true){
+					//List<Task> tasksList = null;// tasksManager.getListOfTasks(doctorAllTask_id);
+						pw.println("getListOfReportsByDoctorFromElder"); //find list task from doctor id
+						pw.println(doctor_id2);
+						pw.println(elderly_id2);
+						
+						ArrayList <Report> reports = new ArrayList<>();
+						String cantidad_reports_text=br.readLine();
+						int cantidad_reports=Integer.parseInt(cantidad_reports_text);
+						for(int i = 0; i < cantidad_reports; i++) {
+							
+							String reports_text=br.readLine();
+							Report report=new Report(reports_text);
+							reports.add(report);
+						}
+						if(reports.isEmpty()==true) {
+							System.out.println("Sorry, for this moment this patient doesnt have any associated report");
+							break;
+						}else{
+							System.out.println("List of reports: " + reports);
+							break;
+						}	
+					}else {	
+						System.out.println("Sorry, this id does not correspond to that of any of your associated patients");
+						break;
+					}
+				case 5:
 					mainMenu();
 					break;
 
