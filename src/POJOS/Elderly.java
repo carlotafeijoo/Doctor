@@ -16,7 +16,7 @@ public class Elderly implements Serializable {
 	private int dni;
 	private int doctor_id;
 	private Date dob;
-	private List<String> symptoms;
+	private String symptoms;
 	private List<Doctor> doctor_list;
 	private List<Task> task_list;
 
@@ -75,7 +75,7 @@ public class Elderly implements Serializable {
 	}
 
 
-	public Elderly(int elderly_id, String name, int dni, int doctor_id, Date dob, List<String> symptoms,
+	public Elderly(int elderly_id, String name, int dni, int doctor_id, Date dob, String symptoms,
 			List<Doctor> doctor_list) {
 		super();
 		this.elderly_id = elderly_id;
@@ -143,11 +143,11 @@ public class Elderly implements Serializable {
 		return Objects.hash(elderly_id);
 	}
 	
-	public List<String> getSymptoms() {
+	public String getSymptoms() {
 		return symptoms;
 	}
 
-	public void setSymptoms(List<String> symptoms) {
+	public void setSymptoms(String symptoms) {
 		this.symptoms = symptoms;
 	}
 

@@ -197,7 +197,7 @@ public class DoctorMenuResidencialArea {
 		User u = null;
 
 		if(user_text.equalsIgnoreCase("error")) {
-			System.out.println("User not found");
+			System.out.println("User not found\n");
 			mainMenu();
 		}
 		else {
@@ -206,12 +206,15 @@ public class DoctorMenuResidencialArea {
 		}
 		
 		/*User u = new User(user_text);
-		u.setRole(new Role(role_text));
+		u.setRole(new Role(role_text));*/
 		
 		//TODO checkear esto: es null? es vacio? hay que mover el if?
-		if (u == null) {
+		/*if (u == null) {
 			System.out.println("User not found");
 			mainMenu();
+		}else {
+			Sring user_name user_text);
+			u.setRole(new Role(role_text));
 		}*/
 
 		// depending on the type of user we open a different menu
