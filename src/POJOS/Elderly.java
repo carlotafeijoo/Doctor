@@ -68,9 +68,10 @@ public class Elderly implements Serializable {
 		this.dni = Integer.parseInt(elderly_text.substring(elderly_text.indexOf("dni=") +4, elderly_text.indexOf(", doctor_id")));
 		this.doctor_id = Integer.parseInt(elderly_text.substring(elderly_text.indexOf("doctor_id=") +10, elderly_text.indexOf(", dob")));
 
-		String date_text = "" + elderly_text.substring(elderly_text.indexOf("dob=") + 4, elderly_text.indexOf("]"));
+		String date_text = "" + elderly_text.substring(elderly_text.indexOf("dob=") + 4, elderly_text.indexOf("symptoms="));
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		this.dob = dateFormat.parse(date_text);
+		this.symptoms = elderly_text.substring(elderly_text.indexOf("symptoms=") + 9, elderly_text.indexOf("]"));
 
 	}
 
@@ -85,6 +86,27 @@ public class Elderly implements Serializable {
 		this.dob = dob;
 		this.symptoms = symptoms;
 		this.doctor_list = doctor_list;
+	}
+	
+	public Elderly(int elderly_id, String name, int dni, int doctor_id, Date dob, String symptoms) {
+		super();
+		this.elderly_id = elderly_id;
+		this.name = name;
+		this.dni = dni;
+		this.doctor_id = doctor_id;
+		this.dob = dob;
+		this.symptoms = symptoms;
+	
+	}
+	
+	public Elderly(int elderly_id, String name, int dni, Date dob, String symptoms) {
+		super();
+		this.elderly_id = elderly_id;
+		this.name = name;
+		this.dni = dni;
+		this.dob = dob;
+		this.symptoms = symptoms;
+	
 	}
 
 	public int getElderly_id() {
@@ -123,16 +145,25 @@ public class Elderly implements Serializable {
 		return serialVersionUID;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		return "Elderly [elderly_id=" + elderly_id + ", name=" + name + ", dni=" + dni + ", doctor_id=" + doctor_id
 				+ ", dob=" + dateFormat.format(dob) + "]";
+	}*/
+	
+	@Override
+	public String toString() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		return "Elderly [elderly_id=" + elderly_id + ", name=" + name + ", dni=" + dni + ", doctor_id=" + doctor_id
+				+ ", dob=" + dob + ", symptoms=" + symptoms + "]";
 	}
+
 
 	public int getDni() {
 		return dni;
 	}
+
 
 	public void setDni(int dni) {
 		this.dni = dni;

@@ -251,8 +251,9 @@ public class DoctorMenuResidencialArea {
 				System.out.println("1.Update information. ");
 				System.out.println("2.Register new task. ");
 				System.out.println("3.List all the tasks. ");
-				System.out.println("4.See patient report. ");
-				System.out.println("5.Back.  ");
+				System.out.println("4.See patient symptoms. ");
+				System.out.println("5.See patient report. ");
+				System.out.println("6.Back.  ");
 
 				choice = InputException.getInt("Introduce your choice: ");
 
@@ -354,7 +355,29 @@ public class DoctorMenuResidencialArea {
 						System.out.println("Sorry, this id does not correspond to that of any of your associated patients");
 						break;
 					}
-				case 4:	//LIST ALL THE REPORTS
+					
+				case 4:
+					
+					pw.println("searchDoctorIdfromUId");
+					pw.println(User_id);
+					String doctorIDtext = br.readLine();
+					int doctorID = Integer.parseInt(doctorIDtext);
+					
+					List <Elderly> eld_list = getListOfElderlyByDoctorID(doctorID);
+					System.out.println(eld_list);
+					
+					System.out.println("Introduce elderly id to see its symptoms:");
+					String eld_id_txt = read.readLine();
+					
+					
+					pw.println("seeSymptoms");
+					pw.println(eld_id_txt);
+					String symp = br.readLine();
+					System.out.println(symp);
+					
+					
+					
+				case 5:	//LIST ALL THE REPORTS
 					//int doctorAllTask_id = 0;// DoctorManager.searchDoctorIdfromUId(User_id);
 					pw.println("searchDoctorIdfromUId"); //find id doctor from User id
 					pw.println(User_id);
@@ -395,7 +418,7 @@ public class DoctorMenuResidencialArea {
 						System.out.println("Sorry, this id does not correspond to that of any of your associated patients");
 						break;
 					}
-				case 5:
+				case 6:
 					mainMenu();
 					break;
 
@@ -419,16 +442,21 @@ public class DoctorMenuResidencialArea {
 		
 		List <Elderly> elderlies = getListOfElderlyByDoctorID(doctorToAssignNewTask_id);
 		System.out.println(elderlies);
+		
 		int elderly_id = InputException.getInt("Elderly id: ");
 		int duration = InputException.getInt("Duration: ");
+		
 		if(elderlies.isEmpty()==true){
+			
 			System.out.println("Sorry, you dont have any pattient associated in this moment");
 		}else if(checklist(elderly_id,elderlies)== true){
+			
 			Task task = new Task(description, doctorToAssignNewTask_id, duration, elderly_id);
 			pw.println("addTask");
 			pw.println(task);
 			br.readLine();
 			System.out.println("Task added sucessfully!");
+			
 		}else {	
 			System.out.println("Sorry, this id does not correspond to that of any of your associated patients");
 	
@@ -440,11 +468,14 @@ public class DoctorMenuResidencialArea {
 		
 	}
 	public static List <Elderly> getListOfElderlyByDoctorID(int doctor_id) throws Exception {
+		
 		pw.println("getListOfElderlyByDoctorID");
 		pw.println(doctor_id);
+		
 		ArrayList <Elderly>elderlies = new ArrayList<>();
 		String cantidad_elderlies_text=br.readLine();
 		int cantidad_elderlies=Integer.parseInt(cantidad_elderlies_text);
+		
 		for(int i = 0; i < cantidad_elderlies; i++) {
 			
 			String elderly_text=br.readLine();
@@ -454,6 +485,8 @@ public class DoctorMenuResidencialArea {
 		}
 		return elderlies;
 	}
+	
+	
 	public static boolean checklist(int eld_id,  List <Elderly> elder) {
 		boolean check= false;
 		for (int i=0; i < elder.size();i++ ) {
@@ -463,6 +496,8 @@ public class DoctorMenuResidencialArea {
 		}
 		return check;
 	}
+	
+	
 	public static boolean checkDate(int year, int month, int day) {
 	    if (year < 1900 || year > 2024) {
 	        return false;
