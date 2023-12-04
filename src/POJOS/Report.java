@@ -23,6 +23,13 @@ public class Report {
 	}
 
 
+	public Report(String file_name, int task_id, int elderly_id) {
+		super();
+		this.file_name = file_name;
+		this.task_id = task_id;
+		this.elderly_id = elderly_id;
+	}
+
 	public int getReport_id() {
 		return report_id;
 	}
