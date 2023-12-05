@@ -402,9 +402,9 @@ public class DoctorMenuResidencialArea {
 						String cantidad_reports_text=br.readLine();
 						int cantidad_reports=Integer.parseInt(cantidad_reports_text);
 						for(int i = 0; i < cantidad_reports; i++) {
-							
 							String reports_text=br.readLine();
 							Report report=new Report(reports_text);
+							System.out.println(report);
 							reports.add(report);
 						}
 						if(reports.isEmpty()==true) {
@@ -413,6 +413,7 @@ public class DoctorMenuResidencialArea {
 						}else{
 							System.out.println("List of reports: " + reports);
 							break;
+							//TODO: En vez de break, que pida que report quiere ver y mostrárselo
 						}	
 					}else {	
 						System.out.println("Sorry, this id does not correspond to that of any of your associated patients");

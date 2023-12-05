@@ -89,9 +89,9 @@ public class Report {
 	}
 
 	public Report (String report_string) {
-		this.report_id = Integer.parseInt(report_string.substring(report_string.indexOf("report_id=") +8, report_string.indexOf(", file_name")));
-		this.file_name = report_string.substring(report_string.indexOf("file_name=") + 12, report_string.indexOf(", task_id"));
-		this.task_id = Integer.parseInt(report_string.substring(report_string.indexOf("task_id=") +10, report_string.indexOf(", elderly_id")));
+		this.report_id = Integer.parseInt(report_string.substring(report_string.indexOf("report_id=") +10, report_string.indexOf(", file_name")));
+		this.file_name = report_string.substring(report_string.indexOf("file_name=") + 10, report_string.indexOf(", task_id"));
+		this.task_id = Integer.parseInt(report_string.substring(report_string.indexOf("task_id=") +8, report_string.indexOf(", elderly_id")));
 		this.elderly_id = Integer.parseInt(report_string.substring(report_string.indexOf("elderly_id=") +11, report_string.indexOf("]")));
 	}
 
