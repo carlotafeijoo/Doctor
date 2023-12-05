@@ -25,7 +25,7 @@ public class DoctorMenuResidencialArea {
 
 	public static void main(String[] args) throws IOException {
 
-		System.out.println("\nWELCOME TO DOCTOR THE RESIDENCIAL AREA DATA BASE");
+		System.out.println("\nDOCTOR! WELCOME TO THE RESIDENCIAL AREA DATA BASE");
 
 		so = new Socket("localhost", 9009);
 		// el cliente lee lineas pero tambien manda
@@ -63,7 +63,7 @@ public class DoctorMenuResidencialArea {
 
 			int option;
 			do {
-				System.out.println("MAIN MENU ");
+				System.out.println("\nMAIN MENU ");
 				System.out.println("1. Enter  ");
 				System.out.println("2. Exit ");
 				option = InputException.getInt("Introduce the number choice:  ");
@@ -94,7 +94,7 @@ public class DoctorMenuResidencialArea {
 	
 	private static void logindoctor() throws Exception {
 
-		System.out.println("\n");
+		System.out.println("\nMENU");
 		System.out.println("1. Register");
 		System.out.println("2. Log in ");
 		System.out.println("3. Exit");
@@ -103,12 +103,14 @@ public class DoctorMenuResidencialArea {
 		switch (choice) {
 		case 1:
 			// Call method REGISTER
+			System.out.println("\n\tREGISTER");
 			registerdoctor();
 			logindoctor();
 			break;
 
 		case 2:
 			// LOG IN as doctor member
+			System.out.println("\n\tLOGIN");
 			logIn();
 			break;
 
@@ -250,7 +252,7 @@ public class DoctorMenuResidencialArea {
 
 			int choice;
 			do {
-				System.out.println("\n");
+				System.out.println("\nMENU");
 				System.out.println("1.Update information. ");
 				System.out.println("2.Register new task. ");
 				System.out.println("3.List all the tasks. ");
@@ -263,6 +265,7 @@ public class DoctorMenuResidencialArea {
 				switch (choice) {
 
 				case 1:	//UPDATE INFORMATION
+					System.out.println("\n\tUPDATING INFORMATION");
 					try {
 						pw.println("searchDoctorIdfromUId");
 						pw.println(User_id);
@@ -309,6 +312,7 @@ public class DoctorMenuResidencialArea {
 					
 
 				case 2:	//REGISTER NEW TASK
+					System.out.println("\n\tREGISTERING NEW TASK");
 					pw.println("searchDoctorIdfromUId");
 					pw.println(User_id);
 					String doctorId_string = br.readLine();
@@ -318,6 +322,7 @@ public class DoctorMenuResidencialArea {
 					break;
 
 				case 3:	//LIST ALL THE TASKS
+					System.out.println("\n\tLISTING ALL THE TASKS");
 					//int doctorAllTask_id = 0;// DoctorManager.searchDoctorIdfromUId(User_id);
 					pw.println("searchDoctorIdfromUId"); //find id doctor from User id
 					pw.println(User_id);
@@ -326,7 +331,9 @@ public class DoctorMenuResidencialArea {
 					
 					
 					List <Elderly> elderlies = getListOfElderlyByDoctorID(doctor_id);
-					System.out.println(elderlies);
+					for (Elderly e : elderlies) {
+						System.out.println(e);
+					}
 					int elderly_id = InputException.getInt("Elderly id to see the tasks: ");
 					
 					if(elderlies.isEmpty()==true){
@@ -351,7 +358,10 @@ public class DoctorMenuResidencialArea {
 							System.out.println("\nSorry, for this moment this patient doesnt have any associated task");
 							break;
 						}else{
-							System.out.println("\nList of tasks: " + tasks);
+							System.out.println("\nList of tasks: ");
+							for (Task t : tasks) {
+								System.out.println(t);
+							}
 							break;
 						}	
 					}else {	
@@ -360,14 +370,16 @@ public class DoctorMenuResidencialArea {
 					}
 					
 				case 4:
-					
+					System.out.println("\n\tSEE PATIENT SYMPTOMS");
 					pw.println("searchDoctorIdfromUId");
 					pw.println(User_id);
 					String doctorIDtext = br.readLine();
 					int doctorID = Integer.parseInt(doctorIDtext);
 					
 					List <Elderly> eld_list = getListOfElderlyByDoctorID(doctorID);
-					System.out.println(eld_list);
+					for (Elderly e : eld_list) {
+						System.out.println(e);
+					}
 					
 					System.out.println("Introduce elderly id to see its symptoms:");
 					String eld_id_txt = read.readLine();
@@ -386,6 +398,7 @@ public class DoctorMenuResidencialArea {
 					break;
 					
 				case 5:	//LIST ALL THE REPORTS
+					System.out.println("\n\tSEE PATIENT REPORTS");
 					//int doctorAllTask_id = 0;// DoctorManager.searchDoctorIdfromUId(User_id);
 					pw.println("searchDoctorIdfromUId"); //find id doctor from User id
 					pw.println(User_id);
@@ -394,7 +407,9 @@ public class DoctorMenuResidencialArea {
 					
 					
 					List <Elderly> elderlies2 = getListOfElderlyByDoctorID(doctor_id2);
-					System.out.println(elderlies2);
+					for (Elderly e : elderlies2) {
+						System.out.println(e);
+					}
 					int elderly_id2 = InputException.getInt("Elderly id to see the reports: ");
 					
 					if(elderlies2.isEmpty()==true){
@@ -419,7 +434,10 @@ public class DoctorMenuResidencialArea {
 							System.out.println("Sorry, for this moment this patient doesnt have any associated report");
 							break;
 						}else{
-							System.out.println("List of reports: " + reports);
+							System.out.println("List of reports: ");
+							for (Report r : reports) {
+								System.out.println(r);
+							}
 							int report_id = InputException.getInt("Report id to see the graphic: ");
 							pw.println("printReport"); 
 							pw.println(report_id);
@@ -486,7 +504,9 @@ public class DoctorMenuResidencialArea {
 		// print all elderlies of this doctor
 		
 		List <Elderly> elderlies = getListOfElderlyByDoctorID(doctorToAssignNewTask_id);
-		System.out.println(elderlies);
+		for (Elderly e : elderlies) {
+			System.out.println(e);
+		}
 		
 		int elderly_id = InputException.getInt("Elderly id: ");
 		int duration = InputException.getInt("Duration: ");
