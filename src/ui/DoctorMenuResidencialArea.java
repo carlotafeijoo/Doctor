@@ -374,8 +374,7 @@ public class DoctorMenuResidencialArea {
 					pw.println(eld_id_txt);
 					String symp = br.readLine();
 					System.out.println(symp);
-					
-					
+					break;
 					
 				case 5:	//LIST ALL THE REPORTS
 					//int doctorAllTask_id = 0;// DoctorManager.searchDoctorIdfromUId(User_id);
