@@ -420,8 +420,44 @@ public class DoctorMenuResidencialArea {
 							break;
 						}else{
 							System.out.println("List of reports: " + reports);
+							int report_id = InputException.getInt("Report id to see the graphic: ");
+							pw.println("printReport"); 
+							pw.println(report_id);
+						
+							String task_id_text = br.readLine();
+							String file_name = br.readLine();
+							int task_id = Integer.parseInt(task_id_text);
+							String id_elderly_text = br.readLine();
+							int elderly_id3 = Integer.parseInt(id_elderly_text);
+
+							Report rep =new Report(file_name, task_id, elderly_id3);
+                			String diract = System.getProperty("user.dir"); 
+							String dirfolder = diract +"//recordstxt";
+
+							File archivo = new File(dirfolder, file_name);
+
+							PrintWriter printwriter = null;
+
+							try {
+								printwriter = new PrintWriter(archivo);
+								String stringleido;
+								stringleido = br.readLine();
+
+								String signal = convertCommaIntoLines(stringleido);
+
+								printwriter.println(signal);
+
+							} catch (IOException ioe) {
+								System.out.println("Error" + ioe);
+							} finally {
+								if (printwriter != null) {
+									printwriter.close();
+								}
+
+							}
+
 							break;
-							//TODO: En vez de break, que pida que report quiere ver y mostrárselo
+
 						}	
 					}else {	
 						System.out.println("Sorry, this id does not correspond to that of any of your associated patients");
@@ -534,6 +570,11 @@ public class DoctorMenuResidencialArea {
 	        }
 	    }
 	    return true;
+	}
+	
+	private static String convertCommaIntoLines(String stringleido) {
+		String signal = stringleido.replace(",", "\n");
+		return signal;
 	}
 	
 }
