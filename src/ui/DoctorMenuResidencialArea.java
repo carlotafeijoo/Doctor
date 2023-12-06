@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import exceptions.Plotting;
 
 
 import exceptions.InputException;
@@ -591,6 +592,26 @@ public class DoctorMenuResidencialArea {
 	    }
 	    return true;
 	}
+
+
+	    public static void ECGPlot(String args) {
+	        ArrayList<Double> column1 = new ArrayList<>();
+	        ArrayList<Double> column2 = new ArrayList<>();
+
+	            String line = args;
+	            String[] values = line.split("\\t");
+	            column2.add(Double.parseDouble(values[1]));
+	        int time = column2.size();
+	      
+	        double[] signal = column2.stream().mapToDouble(Double::doubleValue).toArray();
+
+	        Plotting fig = new Plotting(600, 300, "ECG Wave", "Time", "Signal");
+	        fig.initialisePlot();
+	        //fig.addSignal("ECG Wave", time, signal, false);
+	        //fig.addSignal("ECG Wave", time, signal, false);
+	       // fig.add_signal("ECG Wave", time, signal, false);
+	       // fig.saveAsPNG(line);
+	    }
 	
 	private static String convertCommaIntoLines(String stringleido) {
 		String signal = stringleido.replace(",", "\n");
