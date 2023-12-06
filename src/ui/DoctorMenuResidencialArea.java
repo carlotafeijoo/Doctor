@@ -463,6 +463,7 @@ public class DoctorMenuResidencialArea {
 								stringleido = br.readLine();
 
 								String signal = convertCommaIntoLines(stringleido);
+								ECGPlot(signal);
 
 								printwriter.println(signal);
 
@@ -595,22 +596,25 @@ public class DoctorMenuResidencialArea {
 
 
 	    public static void ECGPlot(String args) {
-	        ArrayList<Double> column1 = new ArrayList<>();
 	        ArrayList<Double> column2 = new ArrayList<>();
 
-	            String line = args;
-	            String[] values = line.split("\\t");
-	            column2.add(Double.parseDouble(values[1]));
-	        int time = column2.size();
-	      
+	        String line = args;
+	        String[] values = line.split("\\t");
+	        column2.add(Double.parseDouble(values[1]));
 	        double[] signal = column2.stream().mapToDouble(Double::doubleValue).toArray();
 
 	        Plotting fig = new Plotting(600, 300, "ECG Wave", "Time", "Signal");
 	        fig.initialisePlot();
-	        //fig.addSignal("ECG Wave", time, signal, false);
-	        //fig.addSignal("ECG Wave", time, signal, false);
-	       // fig.add_signal("ECG Wave", time, signal, false);
-	       // fig.saveAsPNG(line);
+	        fig.addSignal("ECG Wave", signal, false);
+	        try {
+				fig.saveAsPNG("ECG.png");
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	    }
 	
 	private static String convertCommaIntoLines(String stringleido) {
