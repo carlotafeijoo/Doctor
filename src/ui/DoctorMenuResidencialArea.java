@@ -24,20 +24,20 @@ public class DoctorMenuResidencialArea {
 	private static BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
 	//consola
 
-	public static void main(String[] args) throws IOException {
-
-		System.out.println("\nDOCTOR! WELCOME TO THE RESIDENCIAL AREA DATA BASE");
-
-		//so = new Socket("192.168.1.52", 9009);
-		so = new Socket("localhost", 9009);
-		// el cliente lee lineas pero tambien manda
-		br = new BufferedReader(new InputStreamReader(so.getInputStream())); //sockets cliente
-		os = so.getOutputStream();
-		pw = new PrintWriter(os, true);
-
-		mainMenu();
-
-	}
+	//	public static void main(String[] args) throws IOException {
+	//
+	//		System.out.println("\nDOCTOR! WELCOME TO THE RESIDENCIAL AREA DATA BASE");
+	//
+	//		//so = new Socket("192.168.1.52", 9009);
+	//		so = new Socket("localhost", 9009);
+	//		// el cliente lee lineas pero tambien manda
+	//		br = new BufferedReader(new InputStreamReader(so.getInputStream())); //sockets cliente
+	//		os = so.getOutputStream();
+	//		pw = new PrintWriter(os, true);
+	//
+	//		mainMenu();
+	//
+	//	}
 
 	private static void releaseResources(PrintWriter printWriter, BufferedReader br, OutputStream outputStream,
 			Socket socket) {
@@ -80,7 +80,7 @@ public class DoctorMenuResidencialArea {
 					System.out.println("YOU HAVE EXIT THE RESIDENCIAL AREA DATA BASE");
 					pw.println("stop");
 					releaseResources(pw, br, os, so);
-					
+
 					System.exit(2);
 					break;
 
@@ -93,7 +93,7 @@ public class DoctorMenuResidencialArea {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private static void logindoctor() throws Exception {
 
 		System.out.println("\nMENU");
@@ -125,7 +125,7 @@ public class DoctorMenuResidencialArea {
 			break;
 		}
 	}
-	
+
 	public static void registerdoctor() throws Exception {
 
 		System.out.println("Input information: ");
@@ -135,7 +135,7 @@ public class DoctorMenuResidencialArea {
 		String field = null;
 		int choice;
 		do {
-			
+
 			System.out.println("\n");
 			System.out.println("1.Cardiologist");
 			System.out.println("2.Generalist Physician");
@@ -168,27 +168,27 @@ public class DoctorMenuResidencialArea {
 
 		System.out.println("Enter the day of birth:");
 		int day = Integer.parseInt(read.readLine());
-		
+
 		if (checkDate(year, month, day)==false) {
 			System.out.println("Sorry your date of birth is worng, try again \n");
-			
+
 		}else {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String dobStr = String.format("%04d-%02d-%02d", year, month, day);
-		java.util.Date utilDate = dateFormat.parse(dobStr);
-		java.sql.Date dob = new java.sql.Date(utilDate.getTime());
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String dobStr = String.format("%04d-%02d-%02d", year, month, day);
+			java.util.Date utilDate = dateFormat.parse(dobStr);
+			java.sql.Date dob = new java.sql.Date(utilDate.getTime());
 
-		String username = email;
-		Doctor doctor = new Doctor(name, phone, dob, address, email);
+			String username = email;
+			Doctor doctor = new Doctor(name, phone, dob, address, email);
 
-		String password = InputException.getString("Password: ");
+			String password = InputException.getString("Password: ");
 
-		pw.println("addDoctor");
-		pw.println(username);
-		pw.println(password);
-		pw.println(doctor.toString());
-		System.out.println(	br.readLine());
-	
+			pw.println("addDoctor");
+			pw.println(username);
+			pw.println(password);
+			pw.println(doctor.toString());
+			System.out.println(	br.readLine());
+
 		}
 	}
 
@@ -196,14 +196,14 @@ public class DoctorMenuResidencialArea {
 
 		String username = InputException.getString("Username: ");
 		String password = InputException.getString("Password: ");
-		
+
 		pw.println("checkPassword");
 		pw.println(username);
 		pw.println(password);
 
 		String role_text=br.readLine();
 		String user_text = br.readLine();
-		
+
 		User u = null;
 
 		if(user_text.equalsIgnoreCase("error")) {
@@ -214,10 +214,10 @@ public class DoctorMenuResidencialArea {
 			u = new User(user_text);
 			u.setRole(new Role(role_text));
 		}
-		
+
 		/*User u = new User(user_text);
 		u.setRole(new Role(role_text));*/
-		
+
 		//TODO checkear esto: es null? es vacio? hay que mover el if?
 		/*if (u == null) {
 			System.out.println("User not found");
@@ -230,7 +230,7 @@ public class DoctorMenuResidencialArea {
 		// depending on the type of user we open a different menu
 		if (u != null && u.getRole().getName().equals("Doctor")) {
 			Integer id = u.getId();
-			
+
 			pw.println("searchDoctorIdfromUId");
 			pw.println(""+id);
 			String doctor_id_text=br.readLine();
@@ -240,7 +240,7 @@ public class DoctorMenuResidencialArea {
 			pw.println(doctor_id);
 			String doctor_text = br.readLine();
 			Doctor doctor = new Doctor(doctor_text);
-			
+
 			System.out.println("\nLogin successful!");
 			System.out.println(doctor);
 			doctorMenu(u.getId());
@@ -281,9 +281,9 @@ public class DoctorMenuResidencialArea {
 						pw.println(doctor_id);
 						String doctor_string = br.readLine();
 						Doctor doctorToUpdate = new Doctor(doctor_string);
-					
+
 						if (doctorToUpdate != null) {
-							
+
 							int newPhone = InputException.getInt("Enter your new phone number: ");
 							doctorToUpdate.setPhone(newPhone);
 							String newAddress = InputException.getString("Enter your new address: ");
@@ -299,10 +299,10 @@ public class DoctorMenuResidencialArea {
 							java.util.Date utilDate = dateFormat.parse(dobStr);
 							java.sql.Date dob = new java.sql.Date(utilDate.getTime());
 							doctorToUpdate.setDob(dob);
-							
+
 							pw.println("updateDoctorMemberInfo");
 							pw.println(doctorToUpdate.toString());
-							
+
 							System.out.println("\nInformation updated successfully! ");
 						} else {
 							System.out.println("\nDoctor not found");
@@ -311,7 +311,7 @@ public class DoctorMenuResidencialArea {
 						System.out.println("Input format error when updating Doctor" + pe);
 					}
 					break;
-					
+
 
 				case 2:	//REGISTER NEW TASK
 					System.out.println("\n\tREGISTERING NEW TASK");
@@ -319,7 +319,7 @@ public class DoctorMenuResidencialArea {
 					pw.println(User_id);
 					String doctorId_string = br.readLine();
 					int doctorToAssignNewTask_id = Integer.parseInt(doctorId_string);
-					
+
 					addTask(doctorToAssignNewTask_id);
 					break;
 
@@ -330,28 +330,28 @@ public class DoctorMenuResidencialArea {
 					pw.println(User_id);
 					String doctor_id_string = br.readLine();
 					int doctor_id = Integer.parseInt(doctor_id_string);
-					
-					
+
+
 					List <Elderly> elderlies = getListOfElderlyByDoctorID(doctor_id);
 					for (Elderly e : elderlies) {
 						System.out.println(e);
 					}
 					int elderly_id = InputException.getInt("Elderly id to see the tasks: ");
-					
+
 					if(elderlies.isEmpty()==true){
 						System.out.println("\nSorry, you dont have any pattient associated in this moment");
 						break;
 					}else if(checklist(elderly_id,elderlies)== true){
-					//List<Task> tasksList = null;// tasksManager.getListOfTasks(doctorAllTask_id);
+						//List<Task> tasksList = null;// tasksManager.getListOfTasks(doctorAllTask_id);
 						pw.println("getListOfTasksByDoctorFromElder"); //find list task from doctor id
 						pw.println(doctor_id);
 						pw.println(elderly_id);
-						
+
 						ArrayList <Task> tasks = new ArrayList<>();
 						String cantidad_tasks_text=br.readLine();
 						int cantidad_tasks=Integer.parseInt(cantidad_tasks_text);
 						for(int i = 0; i < cantidad_tasks; i++) {
-							
+
 							String tasks_text=br.readLine();
 							Task task=new Task(tasks_text);
 							tasks.add(task);
@@ -370,34 +370,34 @@ public class DoctorMenuResidencialArea {
 						System.out.println("\nSorry, this id does not correspond to that of any of your associated patients");
 						break;
 					}
-					
+
 				case 4:
 					System.out.println("\n\tSEE PATIENT SYMPTOMS");
-					
+
 					pw.println("searchDoctorIdfromUId");
 					pw.println(User_id);
 					String doctorIDtext = br.readLine();
 					int doctorID = Integer.parseInt(doctorIDtext);
-					
+
 					List <Elderly> eld_list = getListOfElderlyByDoctorID(doctorID);
 					for (Elderly e : eld_list) {
 						System.out.println(e);
 					}
-					
+
 					System.out.println("Introduce elderly id to see its symptoms:");
 					String eld_id_txt = read.readLine();
 					int eld_id = Integer.parseInt(eld_id_txt);
-					
+
 					if(eld_list.isEmpty()==true){
 						System.out.println("\nSorry, you dont have any patient associated in this moment");
 						break;
-						
+
 					}else if(checklist(eld_id, eld_list)== true){
-					
+
 						pw.println("seeSymptoms");
 						pw.println(eld_id_txt);
 						String symp = br.readLine();
-						
+
 						if (symp.equalsIgnoreCase("null")) {
 							System.out.println("This patient has no symptoms/n");
 						}
@@ -405,14 +405,14 @@ public class DoctorMenuResidencialArea {
 							System.out.println(symp);
 						}
 						break;
-						
-						
+
+
 					}else {	
 						System.out.println("\nSorry, this id does not correspond to that of any of your associated patients");
 						break;
 					}
-					
-					
+
+
 				case 5:	//LIST ALL THE REPORTS
 					System.out.println("\n\tSEE PATIENT REPORTS");
 					//int doctorAllTask_id = 0;// DoctorManager.searchDoctorIdfromUId(User_id);
@@ -420,30 +420,30 @@ public class DoctorMenuResidencialArea {
 					pw.println(User_id);
 					String doctor_id_string2 = br.readLine();
 					int doctor_id2 = Integer.parseInt(doctor_id_string2);
-					
-					
+
+
 					List <Elderly> elderlies2 = getListOfElderlyByDoctorID(doctor_id2);
 					for (Elderly e : elderlies2) {
 						System.out.println(e);
 					}
 					int elderly_id2 = InputException.getInt("Elderly id to see the reports: ");
-					
+
 					if(elderlies2.isEmpty()==true){
 						System.out.println("Sorry, you dont have any pattient associated in this moment");
 						break;
 					}else if(checklist(elderly_id2,elderlies2)== true){
-					//List<Task> tasksList = null;// tasksManager.getListOfTasks(doctorAllTask_id);
+						//List<Task> tasksList = null;// tasksManager.getListOfTasks(doctorAllTask_id);
 						pw.println("getListOfReportsByDoctorFromElder"); //find list task from doctor id
 						pw.println(doctor_id2);
 						pw.println(elderly_id2);
-						
+
 						ArrayList <Report> reports = new ArrayList<>();
 						String cantidad_reports_text=br.readLine();
 						int cantidad_reports=Integer.parseInt(cantidad_reports_text);
 						for(int i = 0; i < cantidad_reports; i++) {
 							String reports_text=br.readLine();
 							Report report=new Report(reports_text);
-							System.out.println(report);
+							//System.out.println(report);
 							reports.add(report);
 						}
 						if(reports.isEmpty()==true) {
@@ -457,7 +457,7 @@ public class DoctorMenuResidencialArea {
 							int report_id = InputException.getInt("Report id to see the graphic: ");
 							pw.println("printReport"); 
 							pw.println(report_id);
-						
+
 							String task_id_text = br.readLine();
 							String file_name = br.readLine();
 							int task_id = Integer.parseInt(task_id_text);
@@ -465,7 +465,7 @@ public class DoctorMenuResidencialArea {
 							int elderly_id3 = Integer.parseInt(id_elderly_text);
 
 							Report rep =new Report(file_name, task_id, elderly_id3);
-                			String diract = System.getProperty("user.dir"); 
+							String diract = System.getProperty("user.dir"); 
 							String dirfolder = diract +"//recordstxt";
 
 							File archivo = new File(dirfolder, file_name);
@@ -519,56 +519,56 @@ public class DoctorMenuResidencialArea {
 		String description = InputException.getString("Description: ");
 
 		// print all elderlies of this doctor
-		
+
 		List <Elderly> elderlies = getListOfElderlyByDoctorID(doctorToAssignNewTask_id);
 		for (Elderly e : elderlies) {
 			System.out.println(e);
 		}
-		
+
 		int elderly_id = InputException.getInt("Elderly id: ");
 		int duration = InputException.getInt("Duration: ");
-		
+
 		if(elderlies.isEmpty()==true){
-			
+
 			System.out.println("Sorry, you dont have any pattient associated in this moment");
 		}else if(checklist(elderly_id,elderlies)== true){
-			
+
 			Task task = new Task(description, doctorToAssignNewTask_id, duration, elderly_id);
 			pw.println("addTask");
 			pw.println(task);
 			br.readLine();
 			System.out.println("Task added sucessfully!");
-			
+
 		}else {	
 			System.out.println("Sorry, this id does not correspond to that of any of your associated patients");
-	
+
 		}
-		
-		
+
+
 		// tasksManager.addTask(task);
-				
-		
+
+
 	}
 	public static List <Elderly> getListOfElderlyByDoctorID(int doctor_id) throws Exception {
-		
+
 		pw.println("getListOfElderlyByDoctorID");
 		pw.println(doctor_id);
-		
+
 		ArrayList <Elderly>elderlies = new ArrayList<>();
 		String cantidad_elderlies_text=br.readLine();
 		int cantidad_elderlies=Integer.parseInt(cantidad_elderlies_text);
-		
+
 		for(int i = 0; i < cantidad_elderlies; i++) {
-			
+
 			String elderly_text=br.readLine();
 			Elderly elderly=new Elderly(elderly_text);
 			elderlies.add(elderly);
-			
+
 		}
 		return elderlies;
 	}
-	
-	
+
+
 	public static boolean checklist(int eld_id,  List <Elderly> elder) {
 		boolean check= false;
 		for (int i=0; i < elder.size();i++ ) {
@@ -578,63 +578,145 @@ public class DoctorMenuResidencialArea {
 		}
 		return check;
 	}
-	
-	
+
+
 	public static boolean checkDate(int year, int month, int day) {
-	    if (year < 1900 || year > 2024) {
-	        return false;
-	    }
-	    if (month < 1 || month > 12) {
-	        return false;
-	    }
-	    if (day < 1 || day > 31) {
-	        return false;
-	    }
-	    if (month == 2) {
-	        if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
-	            if (day > 29) {
-	                return false;
-	            }
-	        } else {
-	            if (day > 28) {
-	                return false;
-	            }
-	        }
-	    }
-	    else if (month == 4 || month == 6 || month == 9 || month == 11) {
-	        if (day > 30) {
-	            return false;
-	        }
-	    }
-	    return true;
+		if (year < 1900 || year > 2024) {
+			return false;
+		}
+		if (month < 1 || month > 12) {
+			return false;
+		}
+		if (day < 1 || day > 31) {
+			return false;
+		}
+		if (month == 2) {
+			if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+				if (day > 29) {
+					return false;
+				}
+			} else {
+				if (day > 28) {
+					return false;
+				}
+			}
+		}
+		else if (month == 4 || month == 6 || month == 9 || month == 11) {
+			if (day > 30) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 
-	    public static void ECGPlot(String args) {
-	        ArrayList<Double> column2 = new ArrayList<>();
+	public static void ECGPlot(String args) {
+		ArrayList<Double> column2 = new ArrayList<>();
 
-	        String line = args;
-	        String[] values = line.split("\\t");
-	        column2.add(Double.parseDouble(values[1]));
-	        double[] signal = column2.stream().mapToDouble(Double::doubleValue).toArray();
+		String line = args;
+		//System.out.println(line);
+		//String[] values = line.split("\\t");
+		String[] filas = line.split("\n");
 
-	        Plotting fig = new Plotting(600, 300, "ECG Wave", "Time", "Signal");
-	        fig.initialisePlot();
-	        fig.addSignal("ECG Wave", signal, false);
-	        try {
-				fig.saveAsPNG("ECG.png");
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    }
-	
+		String[][] values = new String[filas.length][];
+		for (int i = 0; i < filas.length; i++) {
+			values[i] = filas[i].split("\\t");
+		}
+
+		for (int i = 0; i < values.length; i++) {
+			column2.add(Double.parseDouble(values[i][1]));
+
+		}
+		//System.out.print(column2 + "\t");
+		//column2.add(Double.parseDouble(values[1]));
+
+		//System.out.println(column2);
+		double[] signal = column2.stream().mapToDouble(Double::doubleValue).toArray();
+		//System.out.println(signal);
+
+		Plotting fig = new Plotting(1000, 300, "ECG Wave", "Time", "Signal");
+		fig.initialisePlot();
+		fig.addSignal("ECG Wave", signal, false);
+		//fig.addSignal("ECG Wave", signal, false, "-");
+		try {
+			fig.saveAsPNG("ECGPrueba.png");
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	private static String convertCommaIntoLines(String stringleido) {
 		String signal = stringleido.replace(",", "\n");
 		return signal;
 	}
-	
+
+	public static void main(String[] args) {
+		//leemos el fichero
+		FileInputStream fileinputstream = null;
+		InputStreamReader inputstreamreader = null;
+		BufferedReader bufferedreader = null;
+
+		try {
+			String diract = System.getProperty("user.dir"); // find where the program is executing
+			String dirfolder = diract +"\\recordstxt";
+			//System.out.println(dirfolder);
+			File filetxt = new File(dirfolder, "222_Date_07-12-2023_Hour_05-05-15.txt");
+			//System.out.println(filetxt.getAbsolutePath());
+			fileinputstream = new FileInputStream(filetxt);
+			inputstreamreader = new InputStreamReader(fileinputstream);
+			bufferedreader = new BufferedReader(inputstreamreader);
+			String texto = "";
+			String stringleido;
+			//stringleido = bufferedreader.readLine();
+			while (true) {
+				stringleido = bufferedreader.readLine();
+				if (stringleido == null) {
+					break;
+				}
+				texto = texto + stringleido + ",";
+			}
+
+			//lo ploteamos
+			String signal = convertCommaIntoLines(texto);
+			ECGPlot(signal);
+
+		} catch (IOException ioe) {
+			System.out.println("\nError durante el proceso\t" + ioe);
+		} finally {
+			try {  //se cierran en sentido contrario al que se han abierto
+				if (bufferedreader != null) {
+					bufferedreader.close();
+				}
+			} catch (IOException ioe) {
+				System.out.println("\nError durante el proceso\t" + ioe);
+			}
+			try {
+				if (inputstreamreader != null) {
+					inputstreamreader.close();
+				}
+			} catch (IOException ioe) {
+				System.out.println("\nError durante el proceso\t" + ioe);
+			}
+			try {
+				if (fileinputstream != null) {
+					fileinputstream.close();
+				}
+			} catch (IOException ioe) {
+				System.out.println("\nError durante el proceso\t" + ioe);
+			}
+		}
+
+
+
+
+
+
+
+	}
+
+
 }
