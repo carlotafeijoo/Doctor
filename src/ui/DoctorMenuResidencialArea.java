@@ -373,6 +373,7 @@ public class DoctorMenuResidencialArea {
 					
 				case 4:
 					System.out.println("\n\tSEE PATIENT SYMPTOMS");
+					
 					pw.println("searchDoctorIdfromUId");
 					pw.println(User_id);
 					String doctorIDtext = br.readLine();
@@ -385,6 +386,42 @@ public class DoctorMenuResidencialArea {
 					
 					System.out.println("Introduce elderly id to see its symptoms:");
 					String eld_id_txt = read.readLine();
+					
+					/*if(eld_list.isEmpty()==true){
+						System.out.println("\nSorry, you dont have any pattient associated in this moment");
+						break;
+						
+					}else if(checklist(elderly_id,elderlies)== true){
+					//List<Task> tasksList = null;// tasksManager.getListOfTasks(doctorAllTask_id);
+						pw.println("getListOfTasksByDoctorFromElder"); //find list task from doctor id
+						pw.println(doctor_id);
+						pw.println(elderly_id);
+						
+						ArrayList <Task> tasks = new ArrayList<>();
+						String cantidad_tasks_text=br.readLine();
+						int cantidad_tasks=Integer.parseInt(cantidad_tasks_text);
+						for(int i = 0; i < cantidad_tasks; i++) {
+							
+							String tasks_text=br.readLine();
+							Task task=new Task(tasks_text);
+							tasks.add(task);
+						}
+						if(tasks.isEmpty()==true) {
+							System.out.println("\nSorry, for this moment this patient doesnt have any associated task");
+							break;
+						}else{
+							System.out.println("\nList of tasks: ");
+							for (Task t : tasks) {
+								System.out.println(t);
+							}
+							break;
+						}	
+					}else {	
+						System.out.println("\nSorry, this id does not correspond to that of any of your associated patients");
+						break;
+					}*/
+					
+					
 					
 					
 					pw.println("seeSymptoms");
