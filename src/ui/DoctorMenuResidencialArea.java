@@ -386,55 +386,32 @@ public class DoctorMenuResidencialArea {
 					
 					System.out.println("Introduce elderly id to see its symptoms:");
 					String eld_id_txt = read.readLine();
+					int eld_id = Integer.parseInt(eld_id_txt);
 					
-					/*if(eld_list.isEmpty()==true){
-						System.out.println("\nSorry, you dont have any pattient associated in this moment");
+					if(eld_list.isEmpty()==true){
+						System.out.println("\nSorry, you dont have any patient associated in this moment");
 						break;
 						
-					}else if(checklist(elderly_id,elderlies)== true){
-					//List<Task> tasksList = null;// tasksManager.getListOfTasks(doctorAllTask_id);
-						pw.println("getListOfTasksByDoctorFromElder"); //find list task from doctor id
-						pw.println(doctor_id);
-						pw.println(elderly_id);
+					}else if(checklist(eld_id, eld_list)== true){
+					
+						pw.println("seeSymptoms");
+						pw.println(eld_id_txt);
+						String symp = br.readLine();
 						
-						ArrayList <Task> tasks = new ArrayList<>();
-						String cantidad_tasks_text=br.readLine();
-						int cantidad_tasks=Integer.parseInt(cantidad_tasks_text);
-						for(int i = 0; i < cantidad_tasks; i++) {
-							
-							String tasks_text=br.readLine();
-							Task task=new Task(tasks_text);
-							tasks.add(task);
+						if (symp.equalsIgnoreCase("null")) {
+							System.out.println("This patient has no symptoms/n");
 						}
-						if(tasks.isEmpty()==true) {
-							System.out.println("\nSorry, for this moment this patient doesnt have any associated task");
-							break;
-						}else{
-							System.out.println("\nList of tasks: ");
-							for (Task t : tasks) {
-								System.out.println(t);
-							}
-							break;
-						}	
+						else {
+							System.out.println(symp);
+						}
+						break;
+						
+						
 					}else {	
 						System.out.println("\nSorry, this id does not correspond to that of any of your associated patients");
 						break;
-					}*/
-					
-					
-					
-					
-					pw.println("seeSymptoms");
-					pw.println(eld_id_txt);
-					String symp = br.readLine();
-					
-					if (symp.equalsIgnoreCase("null")) {
-						System.out.println("This patient has no symptoms/n");
 					}
-					else {
-						System.out.println(symp);
-					}
-					break;
+					
 					
 				case 5:	//LIST ALL THE REPORTS
 					System.out.println("\n\tSEE PATIENT REPORTS");
