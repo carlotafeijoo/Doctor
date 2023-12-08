@@ -640,9 +640,13 @@ public class DoctorMenuResidencialArea {
 
 		//System.out.println(column2);
 		double[] signal = column2.stream().mapToDouble(Double::doubleValue).toArray();
-		//System.out.println(signal);
+		//System.out.println(signal.length);
+		
+		// Redondear hacia arriba utilizando Math.ceil()
+        int longitud = (int) (Math.ceil(signal.length / 100.0) * 100);
+        //System.out.println(longitud);
 
-		Plotting fig = new Plotting(1000, 300, "ECG Wave", "Time", "Signal");
+		Plotting fig = new Plotting(longitud, 300, "ECG Wave", "Time", "Signal");
 		fig.initialisePlot();
 		fig.addSignal("ECG Wave", signal, false);
 		//fig.addSignal("ECG Wave", signal, false, "-");
@@ -664,64 +668,64 @@ public class DoctorMenuResidencialArea {
 		return signal;
 	}
 
-/*	public static void main(String[] args) {
-		//leemos el fichero
-		FileInputStream fileinputstream = null;
-		InputStreamReader inputstreamreader = null;
-		BufferedReader bufferedreader = null;
-
-		try {
-			String diract = System.getProperty("user.dir"); // find where the program is executing
-			String dirfolder = diract +"\\recordstxt";
-			//System.out.println(dirfolder);
-			File filetxt = new File(dirfolder, "222_Date_07-12-2023_Hour_05-05-15.txt");
-			//System.out.println(filetxt.getAbsolutePath());
-			fileinputstream = new FileInputStream(filetxt);
-			inputstreamreader = new InputStreamReader(fileinputstream);
-			bufferedreader = new BufferedReader(inputstreamreader);
-			String texto = "";
-			String stringleido;
-			//stringleido = bufferedreader.readLine();
-			while (true) {
-				stringleido = bufferedreader.readLine();
-				if (stringleido == null) {
-					break;
-				}
-				texto = texto + stringleido + ",";
-			}
-
-			//lo ploteamos
-			String signal = convertCommaIntoLines(texto);
-			ECGPlot(signal);
-
-		} catch (IOException ioe) {
-			System.out.println("\nError durante el proceso\t" + ioe);
-		} finally {
-			try {  //se cierran en sentido contrario al que se han abierto
-				if (bufferedreader != null) {
-					bufferedreader.close();
-				}
-			} catch (IOException ioe) {
-				System.out.println("\nError durante el proceso\t" + ioe);
-			}
-			try {
-				if (inputstreamreader != null) {
-					inputstreamreader.close();
-				}
-			} catch (IOException ioe) {
-				System.out.println("\nError durante el proceso\t" + ioe);
-			}
-			try {
-				if (fileinputstream != null) {
-					fileinputstream.close();
-				}
-			} catch (IOException ioe) {
-				System.out.println("\nError durante el proceso\t" + ioe);
-			}
-		}
-
-
-	}*/
+//	public static void main(String[] args) {
+//		//leemos el fichero
+//		FileInputStream fileinputstream = null;
+//		InputStreamReader inputstreamreader = null;
+//		BufferedReader bufferedreader = null;
+//
+//		try {
+//			String diract = System.getProperty("user.dir"); // find where the program is executing
+//			String dirfolder = diract +"\\recordstxt";
+//			//System.out.println(dirfolder);
+//			File filetxt = new File(dirfolder, "222_Date_07-12-2023_Hour_05-05-15.txt");
+//			//System.out.println(filetxt.getAbsolutePath());
+//			fileinputstream = new FileInputStream(filetxt);
+//			inputstreamreader = new InputStreamReader(fileinputstream);
+//			bufferedreader = new BufferedReader(inputstreamreader);
+//			String texto = "";
+//			String stringleido;
+//			//stringleido = bufferedreader.readLine();
+//			while (true) {
+//				stringleido = bufferedreader.readLine();
+//				if (stringleido == null) {
+//					break;
+//				}
+//				texto = texto + stringleido + ",";
+//			}
+//
+//			//lo ploteamos
+//			String signal = convertCommaIntoLines(texto);
+//			ECGPlot(signal);
+//
+//		} catch (IOException ioe) {
+//			System.out.println("\nError durante el proceso\t" + ioe);
+//		} finally {
+//			try {  //se cierran en sentido contrario al que se han abierto
+//				if (bufferedreader != null) {
+//					bufferedreader.close();
+//				}
+//			} catch (IOException ioe) {
+//				System.out.println("\nError durante el proceso\t" + ioe);
+//			}
+//			try {
+//				if (inputstreamreader != null) {
+//					inputstreamreader.close();
+//				}
+//			} catch (IOException ioe) {
+//				System.out.println("\nError durante el proceso\t" + ioe);
+//			}
+//			try {
+//				if (fileinputstream != null) {
+//					fileinputstream.close();
+//				}
+//			} catch (IOException ioe) {
+//				System.out.println("\nError durante el proceso\t" + ioe);
+//			}
+//		}
+//
+//
+//	}
 
 
 }
