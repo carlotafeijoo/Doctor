@@ -486,7 +486,7 @@ public class DoctorMenuResidencialArea {
 								stringleido = br.readLine();
 
 								String signal = convertCommaIntoLines(stringleido);
-								ECGPlot(signal);
+								ECGPlot(signal, file_name);
 
 								printwriter.println(signal);
 
@@ -618,7 +618,7 @@ public class DoctorMenuResidencialArea {
 	}
 
 
-	public static void ECGPlot(String args) {
+	public static void ECGPlot(String args, String file_name) {
 		ArrayList<Double> column2 = new ArrayList<>();
 
 		String line = args;
@@ -647,7 +647,9 @@ public class DoctorMenuResidencialArea {
 		fig.addSignal("ECG Wave", signal, false);
 		//fig.addSignal("ECG Wave", signal, false, "-");
 		try {
-			fig.saveAsPNG("ECGPrueba.png");
+			file_name = file_name + ".png";
+			//fig.saveAsPNG("ECGPrueba.png");
+			fig.saveAsPNG(file_name);
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
