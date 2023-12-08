@@ -24,20 +24,20 @@ public class DoctorMenuResidencialArea {
 	private static BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
 	//consola
 
-	//	public static void main(String[] args) throws IOException {
-	//
-	//		System.out.println("\nDOCTOR! WELCOME TO THE RESIDENCIAL AREA DATA BASE");
-	//
-	//		//so = new Socket("192.168.1.52", 9009);
-	//		so = new Socket("localhost", 9009);
-	//		// el cliente lee lineas pero tambien manda
-	//		br = new BufferedReader(new InputStreamReader(so.getInputStream())); //sockets cliente
-	//		os = so.getOutputStream();
-	//		pw = new PrintWriter(os, true);
-	//
-	//		mainMenu();
-	//
-	//	}
+	public static void main(String[] args) throws IOException {
+
+		System.out.println("\nDOCTOR! WELCOME TO THE RESIDENCIAL AREA DATA BASE");
+
+		//so = new Socket("192.168.1.52", 9009);
+		so = new Socket("localhost", 9009);
+		// el cliente lee lineas pero tambien manda
+		br = new BufferedReader(new InputStreamReader(so.getInputStream())); //sockets cliente
+		os = so.getOutputStream();
+		pw = new PrintWriter(os, true);
+
+	mainMenu();
+
+}
 
 	private static void releaseResources(PrintWriter printWriter, BufferedReader br, OutputStream outputStream,
 			Socket socket) {
@@ -170,7 +170,7 @@ public class DoctorMenuResidencialArea {
 		int day = Integer.parseInt(read.readLine());
 
 		if (checkDate(year, month, day)==false) {
-			System.out.println("Sorry your date of birth is worng, try again \n");
+			System.out.println("Sorry your date of birth is wrong, try again \n");
 
 		}else {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -273,9 +273,7 @@ public class DoctorMenuResidencialArea {
 						pw.println(User_id);
 						String doctor_id_string = br.readLine();
 						int doctor_id = Integer.parseInt(doctor_id_string);
-						//en vez de crear un obejto doctor nuevo con todos los datos de ese doctor que queremos actualizar 
-						//podríamos simplemente pasa por el socket desde el cliente los datos que queremos actualizar con la id del doctor 
-						//y una vez tengamos esos datos en el server actualizar directamente los datos de la db de ese doctor
+						
 
 						pw.println("searchDoctorbyId");
 						pw.println(doctor_id);
@@ -298,15 +296,25 @@ public class DoctorMenuResidencialArea {
 							String dobStr = String.format("%04d-%02d-%02d", year, month, day);
 							java.util.Date utilDate = dateFormat.parse(dobStr);
 							java.sql.Date dob = new java.sql.Date(utilDate.getTime());
-							doctorToUpdate.setDob(dob);
+							
 
-							pw.println("updateDoctorMemberInfo");
-							pw.println(doctorToUpdate.toString());
+							if (checkDate(year, month, day)==false) {
+								System.out.println("Sorry your date of birth is wrong, try again \n");
 
-							System.out.println("\nInformation updated successfully! ");
+							}else {
+								doctorToUpdate.setDob(dob);
+
+								pw.println("updateDoctorMemberInfo");
+								pw.println(doctorToUpdate.toString());
+
+								System.out.println("\nInformation updated successfully! ");
+							}
+							
+							
 						} else {
 							System.out.println("\nDoctor not found");
 						}
+						
 					}catch (ParseException pe) {
 						System.out.println("Input format error when updating Doctor" + pe);
 					}
@@ -429,7 +437,7 @@ public class DoctorMenuResidencialArea {
 					int elderly_id2 = InputException.getInt("Elderly id to see the reports: ");
 
 					if(elderlies2.isEmpty()==true){
-						System.out.println("Sorry, you dont have any pattient associated in this moment");
+						System.out.println("Sorry, you dont have any patient associated in this moment");
 						break;
 					}else if(checklist(elderly_id2,elderlies2)== true){
 						//List<Task> tasksList = null;// tasksManager.getListOfTasks(doctorAllTask_id);
@@ -654,7 +662,7 @@ public class DoctorMenuResidencialArea {
 		return signal;
 	}
 
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		//leemos el fichero
 		FileInputStream fileinputstream = null;
 		InputStreamReader inputstreamreader = null;
@@ -711,12 +719,7 @@ public class DoctorMenuResidencialArea {
 		}
 
 
-
-
-
-
-
-	}
+	}*/
 
 
 }
