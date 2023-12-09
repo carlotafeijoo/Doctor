@@ -68,7 +68,9 @@ public class DoctorMenuResidencialArea {
 				System.out.println("\nMAIN MENU ");
 				System.out.println("1. Enter  ");
 				System.out.println("2. Exit ");
-				option = InputException.getInt("Introduce the number choice:  ");
+				option = InputException.getInt("\nIntroduce the number choice:  ");
+				
+				System.out.println("\n--------------------------------------------------------------------------------");
 
 				switch (option) {
 
@@ -87,11 +89,17 @@ public class DoctorMenuResidencialArea {
 				default:
 					break;
 				}
+				
+				
+				
 			} while (true);
-
+			
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		
 	}
 
 	private static void logindoctor() throws Exception {
@@ -100,7 +108,8 @@ public class DoctorMenuResidencialArea {
 		System.out.println("1. Register");
 		System.out.println("2. Log in ");
 		System.out.println("3. Exit");
-		int choice = InputException.getInt(" Introduce the number of your choice: ");
+		int choice = InputException.getInt("\nIntroduce the number of your choice: ");
+		System.out.println("\n--------------------------------------------------------------------------------");
 
 		switch (choice) {
 		case 1:
@@ -124,11 +133,13 @@ public class DoctorMenuResidencialArea {
 		default:
 			break;
 		}
+		
+		
 	}
 
 	public static void registerdoctor() throws Exception {
-
-		System.out.println("Input information: ");
+		
+		System.out.println("\nInput information: ");
 
 		String name = InputException.getString("Name: ");
 
@@ -171,6 +182,7 @@ public class DoctorMenuResidencialArea {
 
 		if (checkDate(year, month, day)==false) {
 			System.out.println("Sorry your date of birth is wrong, try again \n");
+			System.out.println("\n--------------------------------------------------------------------------------");
 
 		}else {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -188,12 +200,14 @@ public class DoctorMenuResidencialArea {
 			pw.println(password);
 			pw.println(doctor.toString());
 			System.out.println(	br.readLine());
+			System.out.println("\n--------------------------------------------------------------------------------");
 
 		}
+		
 	}
 
 	public static void logIn() throws Exception {
-
+		
 		String username = InputException.getString("Username: ");
 		String password = InputException.getString("Password: ");
 
@@ -208,24 +222,14 @@ public class DoctorMenuResidencialArea {
 
 		if(user_text.equalsIgnoreCase("error")) {
 			System.out.println("User not found\n");
+			System.out.println("\n--------------------------------------------------------------------------------");
 			mainMenu();
 		}
 		else {
 			u = new User(user_text);
 			u.setRole(new Role(role_text));
+			System.out.println("\n--------------------------------------------------------------------------------");
 		}
-
-		/*User u = new User(user_text);
-		u.setRole(new Role(role_text));*/
-
-		//TODO checkear esto: es null? es vacio? hay que mover el if?
-		/*if (u == null) {
-			System.out.println("User not found");
-			mainMenu();
-		}else {
-			Sring user_name user_text);
-			u.setRole(new Role(role_text));
-		}*/
 
 		// depending on the type of user we open a different menu
 		if (u != null && u.getRole().getName().equals("Doctor")) {
@@ -243,9 +247,11 @@ public class DoctorMenuResidencialArea {
 
 			System.out.println("\nLogin successful!");
 			System.out.println(doctor);
-			doctorMenu(u.getId());
+			System.out.println("\n--------------------------------------------------------------------------------");
+			doctorMenu(u.getId());			
 
 		}
+				
 
 	}
 
@@ -262,7 +268,7 @@ public class DoctorMenuResidencialArea {
 				System.out.println("5.See patient report. ");
 				System.out.println("6.Back.  ");
 
-				choice = InputException.getInt("Introduce your choice: ");
+				choice = InputException.getInt("\nIntroduce your choice: ");
 
 				switch (choice) {
 
@@ -300,6 +306,7 @@ public class DoctorMenuResidencialArea {
 
 							if (checkDate(year, month, day)==false) {
 								System.out.println("Sorry your date of birth is wrong, try again \n");
+								System.out.println("\n--------------------------------------------------------------------------------");
 
 							}else {
 								doctorToUpdate.setDob(dob);
@@ -308,12 +315,16 @@ public class DoctorMenuResidencialArea {
 								pw.println(doctorToUpdate.toString());
 
 								System.out.println("\nInformation updated successfully! ");
+								System.out.println("\n--------------------------------------------------------------------------------");
 							}
 							
 							
 						} else {
 							System.out.println("\nDoctor not found");
+							System.out.println("\n--------------------------------------------------------------------------------");
 						}
+						
+						
 						
 					}catch (ParseException pe) {
 						System.out.println("Input format error when updating Doctor" + pe);
@@ -347,8 +358,11 @@ public class DoctorMenuResidencialArea {
 					int elderly_id = InputException.getInt("Elderly id to see the tasks: ");
 
 					if(elderlies.isEmpty()==true){
-						System.out.println("\nSorry, you dont have any pattient associated in this moment");
+						
+						System.out.println("\nSorry, you dont have any patient associated in this moment");
+						System.out.println("\n--------------------------------------------------------------------------------");
 						break;
+						
 					}else if(checklist(elderly_id,elderlies)== true){
 						//List<Task> tasksList = null;// tasksManager.getListOfTasks(doctorAllTask_id);
 						pw.println("getListOfTasksByDoctorFromElder"); //find list task from doctor id
@@ -366,18 +380,22 @@ public class DoctorMenuResidencialArea {
 						}
 						if(tasks.isEmpty()==true) {
 							System.out.println("\nSorry, for this moment this patient doesnt have any associated task");
+							System.out.println("\n--------------------------------------------------------------------------------");
 							break;
 						}else{
 							System.out.println("\nList of tasks: ");
 							for (Task t : tasks) {
 								System.out.println(t);
 							}
+							System.out.println("\n--------------------------------------------------------------------------------");
 							break;
 						}	
 					}else {	
 						System.out.println("\nSorry, this id does not correspond to that of any of your associated patients");
+						System.out.println("\n--------------------------------------------------------------------------------");
 						break;
 					}
+					
 
 				case 4:
 					System.out.println("\n\tSEE PATIENT SYMPTOMS");
@@ -398,6 +416,7 @@ public class DoctorMenuResidencialArea {
 
 					if(eld_list.isEmpty()==true){
 						System.out.println("\nSorry, you dont have any patient associated in this moment");
+						System.out.println("\n--------------------------------------------------------------------------------");
 						break;
 
 					}else if(checklist(eld_id, eld_list)== true){
@@ -408,15 +427,18 @@ public class DoctorMenuResidencialArea {
 
 						if (symp.equalsIgnoreCase("null")) {
 							System.out.println("This patient has no symptoms/n");
+							System.out.println("\n--------------------------------------------------------------------------------");
 						}
 						else {
 							System.out.println(symp);
+							System.out.println("\n--------------------------------------------------------------------------------");
 						}
 						break;
 
 
 					}else {	
 						System.out.println("\nSorry, this id does not correspond to that of any of your associated patients");
+						System.out.println("\n--------------------------------------------------------------------------------");
 						break;
 					}
 
@@ -436,9 +458,11 @@ public class DoctorMenuResidencialArea {
 					}
 					int elderly_id2 = InputException.getInt("Elderly id to see the reports: ");
 
-					if(elderlies2.isEmpty()==true){
+					if(elderlies2.isEmpty()==true){					
 						System.out.println("Sorry, you dont have any patient associated in this moment");
+						System.out.println("\n--------------------------------------------------------------------------------");
 						break;
+						
 					}else if(checklist(elderly_id2,elderlies2)== true){
 						//List<Task> tasksList = null;// tasksManager.getListOfTasks(doctorAllTask_id);
 						pw.println("getListOfReportsByDoctorFromElder"); //find list task from doctor id
@@ -456,9 +480,11 @@ public class DoctorMenuResidencialArea {
 						}
 						if(reports.isEmpty()==true) {
 							System.out.println("Sorry, for this moment this patient doesnt have any associated report");
+							System.out.println("\n--------------------------------------------------------------------------------");
 							break;
+							
 						}else{
-							System.out.println("List of reports: ");
+							System.out.println("\nList of reports: ");
 							for (Report r : reports) {
 								System.out.println(r);
 							}
@@ -492,6 +518,7 @@ public class DoctorMenuResidencialArea {
 
 							} catch (IOException ioe) {
 								System.out.println("Error" + ioe);
+								System.out.println("\n--------------------------------------------------------------------------------");
 							} finally {
 								if (printwriter != null) {
 									printwriter.close();
@@ -504,10 +531,12 @@ public class DoctorMenuResidencialArea {
 						}	
 					}else {	
 						System.out.println("Sorry, this id does not correspond to that of any of your associated patients");
+						System.out.println("\n--------------------------------------------------------------------------------");
 						break;
 					}
 				case 6:
 					mainMenu();
+					System.out.println("\n--------------------------------------------------------------------------------");
 					break;
 
 				default:
@@ -523,9 +552,9 @@ public class DoctorMenuResidencialArea {
 
 	public static void addTask(int doctorToAssignNewTask_id) throws Exception {
 
-		System.out.println("Input the information of the new task: ");
+		System.out.println("\nInput the information of the new task: ");
 		String description = InputException.getString("Description: ");
-
+		
 		// print all elderlies of this doctor
 
 		List <Elderly> elderlies = getListOfElderlyByDoctorID(doctorToAssignNewTask_id);
@@ -538,25 +567,31 @@ public class DoctorMenuResidencialArea {
 
 		if(elderlies.isEmpty()==true){
 
-			System.out.println("Sorry, you dont have any pattient associated in this moment");
+			System.out.println("\nSorry, you dont have any patient associated in this moment");
+			System.out.println("\n--------------------------------------------------------------------------------");
+
 		}else if(checklist(elderly_id,elderlies)== true){
 
 			Task task = new Task(description, doctorToAssignNewTask_id, duration, elderly_id);
 			pw.println("addTask");
 			pw.println(task);
 			br.readLine();
-			System.out.println("Task added sucessfully!");
+			System.out.println("\nTask added sucessfully!");
+			System.out.println("\n--------------------------------------------------------------------------------");
+
 
 		}else {	
-			System.out.println("Sorry, this id does not correspond to that of any of your associated patients");
+			System.out.println("\nSorry, this id does not correspond to that of any of your associated patients");
+			System.out.println("\n--------------------------------------------------------------------------------");
+
 
 		}
 
 
 		// tasksManager.addTask(task);
 
-
 	}
+	
 	public static List <Elderly> getListOfElderlyByDoctorID(int doctor_id) throws Exception {
 
 		pw.println("getListOfElderlyByDoctorID");
@@ -657,10 +692,9 @@ public class DoctorMenuResidencialArea {
 			//fig.saveAsPNG("ECGPrueba.png");
 			fig.saveAsPNG(file_name);
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
