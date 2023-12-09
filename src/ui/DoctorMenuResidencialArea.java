@@ -651,7 +651,9 @@ public class DoctorMenuResidencialArea {
 		fig.addSignal("ECG Wave", signal, false);
 		//fig.addSignal("ECG Wave", signal, false, "-");
 		try {
-			file_name = file_name + ".png";
+			String diract = System.getProperty("user.dir"); 
+			String dirfolder = diract +"//ECG_plots";
+			file_name = dirfolder + file_name + ".png";
 			//fig.saveAsPNG("ECGPrueba.png");
 			fig.saveAsPNG(file_name);
 		} catch (IllegalArgumentException e) {
