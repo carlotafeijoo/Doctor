@@ -28,7 +28,7 @@ public class DoctorMenuResidencialArea {
 
 		System.out.println("\nDOCTOR! WELCOME TO THE RESIDENCIAL AREA DATA BASE");
 
-		//so = new Socket("192.168.1.52", 9009);
+		//so = new Socket("192.168.1.129", 9009);
 		so = new Socket("localhost", 9009);
 		// el cliente lee lineas pero tambien manda
 		br = new BufferedReader(new InputStreamReader(so.getInputStream())); //sockets cliente
@@ -37,7 +37,7 @@ public class DoctorMenuResidencialArea {
 
 	mainMenu();
 
-}
+	}
 
 	private static void releaseResources(PrintWriter printWriter, BufferedReader br, OutputStream outputStream,
 			Socket socket) {
