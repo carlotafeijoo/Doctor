@@ -185,6 +185,8 @@ public class DoctorMenuResidencialArea {
 				break;
 
 			default:
+				registerdoctor();
+				System.out.println("You should introduce an option");
 				break;
 			}
 		} while (choice < 1 || choice > 2);
@@ -290,13 +292,15 @@ public class DoctorMenuResidencialArea {
 			int choice;
 			do {
 				System.out.println("\nMENU");
-				System.out.println("1.Update information. ");
-				System.out.println("2.Register new task. ");
-				System.out.println("3.List all the tasks. ");
-				System.out.println("4.See patient symptoms. ");
-				System.out.println("5.See patient report. ");
-				System.out.println("6.Back.  ");
+				System.out.println("1. Update information. ");
+				System.out.println("2. Register new task. ");
+				System.out.println("3. List all the tasks. ");
+				System.out.println("4. See patient symptoms. ");
+				System.out.println("5. See patient report. ");
+				System.out.println("6. Back.  ");
 				choice = InputException.getInt("\nIntroduce your choice: ");
+				System.out.println("\n--------------------------------------------------------------------------------");
+				
 				switch (choice) {
 
 				case 1:	//UPDATE INFORMATION
