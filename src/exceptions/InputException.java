@@ -3,9 +3,15 @@ package exceptions;
 import java.io.*;
 
 public class InputException {
+	
+	
 
 	private static BufferedReader consola = new BufferedReader(new InputStreamReader(System.in));
-
+	/**
+	Reads a string input from the console.
+	@param question the question to be displayed to the user
+	@return the string input from the user
+	*/
 	public static String getString(String question) {
 
 		while (true) {
@@ -19,7 +25,11 @@ public class InputException {
 			}
 		}
 	}
-
+	/**
+	Reads an integer input from the console.
+	@param question the question to be displayed to the user
+	@return the integer input from the user
+	*/
 	public static Integer getInt(String question) {
 		int x = 0;
 		while (true) {

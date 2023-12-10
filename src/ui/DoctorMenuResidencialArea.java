@@ -23,7 +23,12 @@ public class DoctorMenuResidencialArea {
 	static Socket so = null;
 	private static BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
 	//consola
-
+	/**
+	 * The main method of the program. It initializes socket communication, input and output streams, and calls the mainMenu method.
+	 *
+	 * @param args the command-line arguments
+	 * @throws IOException if an I/O error occurs when creating the socket or the input/output streams
+	 */
 	public static void main(String[] args) throws IOException {
 
 		System.out.println("\nDOCTOR! WELCOME TO THE RESIDENCIAL AREA DATA BASE");
@@ -35,10 +40,17 @@ public class DoctorMenuResidencialArea {
 		os = so.getOutputStream();
 		pw = new PrintWriter(os, true);
 
-	mainMenu();
+		mainMenu();
 
 	}
-
+	/**
+	 * Releases the resources associated with the socket communication.
+	 *
+	 * @param printWriter the PrintWriter to be closed
+	 * @param br the BufferedReader to be closed
+	 * @param outputStream the OutputStream to be closed
+	 * @param socket the Socket to be closed
+	 */
 	private static void releaseResources(PrintWriter printWriter, BufferedReader br, OutputStream outputStream,
 			Socket socket) {
 		printWriter.close();
@@ -59,7 +71,9 @@ public class DoctorMenuResidencialArea {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Displays the main menu and handles user input based on the selected options.
+	 */
 	public static void mainMenu() {
 		try {
 
@@ -69,7 +83,7 @@ public class DoctorMenuResidencialArea {
 				System.out.println("1. Enter  ");
 				System.out.println("2. Exit ");
 				option = InputException.getInt("\nIntroduce the number choice:  ");
-				
+
 				System.out.println("\n--------------------------------------------------------------------------------");
 
 				switch (option) {
@@ -89,19 +103,23 @@ public class DoctorMenuResidencialArea {
 				default:
 					break;
 				}
-				
-				
-				
+
+
+
 			} while (true);
-			
-		
+
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-	}
 
+
+	}
+	/**
+	 * Presents a menu for doctor login and registration, and handles user input based on the selected options.
+	 *
+	 * @throws Exception if an error occurs during the execution of the method
+	 */
 	private static void logindoctor() throws Exception {
 
 		System.out.println("\nMENU");
@@ -133,12 +151,16 @@ public class DoctorMenuResidencialArea {
 		default:
 			break;
 		}
-		
-		
-	}
 
+
+	}
+	/**
+	 * Gathers and validates the information to register a doctor, and communicates with the server to add the doctor.
+	 *
+	 * @throws Exception if an error occurs during the execution of the method
+	 */
 	public static void registerdoctor() throws Exception {
-		
+
 		System.out.println("\nInput information: ");
 
 		String name = InputException.getString("Name: ");
@@ -203,11 +225,15 @@ public class DoctorMenuResidencialArea {
 			System.out.println("\n--------------------------------------------------------------------------------");
 
 		}
-		
-	}
 
+	}
+	/**
+	 * Handles the login process for a user, communicates with the server to validate the user's credentials, and retrieves their role and associated information.
+	 *
+	 * @throws Exception if an error occurs during the execution of the method
+	 */
 	public static void logIn() throws Exception {
-		
+
 		String username = InputException.getString("Username: ");
 		String password = InputException.getString("Password: ");
 
@@ -251,13 +277,16 @@ public class DoctorMenuResidencialArea {
 			doctorMenu(u.getId());			
 
 		}
-				
+
 
 	}
-
+	/**
+	Displays the doctor's menu and handles various options such as updating information, registering new tasks, listing all tasks,
+	viewing patient symptoms, viewing patient reports, and returning to the main menu.
+	@param User_id the unique identifier for the doctor
+	 */
 	private static void doctorMenu(int User_id) {
 		try {
-
 			int choice;
 			do {
 				System.out.println("\nMENU");
@@ -267,9 +296,7 @@ public class DoctorMenuResidencialArea {
 				System.out.println("4.See patient symptoms. ");
 				System.out.println("5.See patient report. ");
 				System.out.println("6.Back.  ");
-
 				choice = InputException.getInt("\nIntroduce your choice: ");
-
 				switch (choice) {
 
 				case 1:	//UPDATE INFORMATION
@@ -279,13 +306,10 @@ public class DoctorMenuResidencialArea {
 						pw.println(User_id);
 						String doctor_id_string = br.readLine();
 						int doctor_id = Integer.parseInt(doctor_id_string);
-						
-
 						pw.println("searchDoctorbyId");
 						pw.println(doctor_id);
 						String doctor_string = br.readLine();
 						Doctor doctorToUpdate = new Doctor(doctor_string);
-
 						if (doctorToUpdate != null) {
 
 							int newPhone = InputException.getInt("Enter your new phone number: ");
@@ -302,35 +326,25 @@ public class DoctorMenuResidencialArea {
 							String dobStr = String.format("%04d-%02d-%02d", year, month, day);
 							java.util.Date utilDate = dateFormat.parse(dobStr);
 							java.sql.Date dob = new java.sql.Date(utilDate.getTime());
-							
 
 							if (checkDate(year, month, day)==false) {
 								System.out.println("Sorry your date of birth is wrong, try again \n");
 								System.out.println("\n--------------------------------------------------------------------------------");
-
 							}else {
 								doctorToUpdate.setDob(dob);
-
 								pw.println("updateDoctorMemberInfo");
 								pw.println(doctorToUpdate.toString());
-
 								System.out.println("\nInformation updated successfully! ");
 								System.out.println("\n--------------------------------------------------------------------------------");
 							}
-							
-							
 						} else {
 							System.out.println("\nDoctor not found");
 							System.out.println("\n--------------------------------------------------------------------------------");
 						}
-						
-						
-						
 					}catch (ParseException pe) {
 						System.out.println("Input format error when updating Doctor" + pe);
 					}
 					break;
-
 
 				case 2:	//REGISTER NEW TASK
 					System.out.println("\n\tREGISTERING NEW TASK");
@@ -338,7 +352,6 @@ public class DoctorMenuResidencialArea {
 					pw.println(User_id);
 					String doctorId_string = br.readLine();
 					int doctorToAssignNewTask_id = Integer.parseInt(doctorId_string);
-
 					addTask(doctorToAssignNewTask_id);
 					break;
 
@@ -349,31 +362,24 @@ public class DoctorMenuResidencialArea {
 					pw.println(User_id);
 					String doctor_id_string = br.readLine();
 					int doctor_id = Integer.parseInt(doctor_id_string);
-
-
 					List <Elderly> elderlies = getListOfElderlyByDoctorID(doctor_id);
 					for (Elderly e : elderlies) {
 						System.out.println(e);
 					}
 					int elderly_id = InputException.getInt("Elderly id to see the tasks: ");
-
 					if(elderlies.isEmpty()==true){
-						
 						System.out.println("\nSorry, you dont have any patient associated in this moment");
 						System.out.println("\n--------------------------------------------------------------------------------");
 						break;
-						
 					}else if(checklist(elderly_id,elderlies)== true){
 						//List<Task> tasksList = null;// tasksManager.getListOfTasks(doctorAllTask_id);
 						pw.println("getListOfTasksByDoctorFromElder"); //find list task from doctor id
 						pw.println(doctor_id);
 						pw.println(elderly_id);
-
 						ArrayList <Task> tasks = new ArrayList<>();
 						String cantidad_tasks_text=br.readLine();
 						int cantidad_tasks=Integer.parseInt(cantidad_tasks_text);
 						for(int i = 0; i < cantidad_tasks; i++) {
-
 							String tasks_text=br.readLine();
 							Task task=new Task(tasks_text);
 							tasks.add(task);
@@ -395,7 +401,7 @@ public class DoctorMenuResidencialArea {
 						System.out.println("\n--------------------------------------------------------------------------------");
 						break;
 					}
-					
+
 
 				case 4:
 					System.out.println("\n\tSEE PATIENT SYMPTOMS");
@@ -462,7 +468,7 @@ public class DoctorMenuResidencialArea {
 						System.out.println("Sorry, you dont have any patient associated in this moment");
 						System.out.println("\n--------------------------------------------------------------------------------");
 						break;
-						
+
 					}else if(checklist(elderly_id2,elderlies2)== true){
 						//List<Task> tasksList = null;// tasksManager.getListOfTasks(doctorAllTask_id);
 						pw.println("getListOfReportsByDoctorFromElder"); //find list task from doctor id
@@ -482,7 +488,7 @@ public class DoctorMenuResidencialArea {
 							System.out.println("Sorry, for this moment this patient doesnt have any associated report");
 							System.out.println("\n--------------------------------------------------------------------------------");
 							break;
-							
+
 						}else{
 							System.out.println("\nList of reports: ");
 							for (Report r : reports) {
@@ -549,12 +555,17 @@ public class DoctorMenuResidencialArea {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Gathers the information for a new task, including description, elderly patient's ID, and task duration, and communicates with the server to add the task.
+	 *
+	 * @param doctorToAssignNewTask_id the unique identifier for the doctor to whom the new task is assigned
+	 * @throws Exception if an error occurs during the execution of the method
+	 */
 	public static void addTask(int doctorToAssignNewTask_id) throws Exception {
 
 		System.out.println("\nInput the information of the new task: ");
 		String description = InputException.getString("Description: ");
-		
+
 		// print all elderlies of this doctor
 
 		List <Elderly> elderlies = getListOfElderlyByDoctorID(doctorToAssignNewTask_id);
@@ -591,7 +602,13 @@ public class DoctorMenuResidencialArea {
 		// tasksManager.addTask(task);
 
 	}
-	
+	/**
+	 * Retrieves a list of elderly individuals associated with a specific doctor from the server.
+	 *
+	 * @param doctor_id the unique identifier for the doctor
+	 * @return a list of elderly individuals associated with the specified doctor
+	 * @throws Exception if an error occurs during the retrieval process
+	 */
 	public static List <Elderly> getListOfElderlyByDoctorID(int doctor_id) throws Exception {
 
 		pw.println("getListOfElderlyByDoctorID");
@@ -611,7 +628,13 @@ public class DoctorMenuResidencialArea {
 		return elderlies;
 	}
 
-
+	/**
+	 * Checks if a given elderly ID exists in a list of elderly individuals.
+	 *
+	 * @param eld_id the elderly ID to be checked
+	 * @param elder the list of elderly individuals
+	 * @return true if the elderly ID exists in the list; false otherwise
+	 */
 	public static boolean checklist(int eld_id,  List <Elderly> elder) {
 		boolean check= false;
 		for (int i=0; i < elder.size();i++ ) {
@@ -622,7 +645,14 @@ public class DoctorMenuResidencialArea {
 		return check;
 	}
 
-
+	/**
+	 * Validates a given date.
+	 *
+	 * @param year the year component of the date
+	 * @param month the month component of the date
+	 * @param day the day component of the date
+	 * @return true if the date is valid; false otherwise
+	 */
 	public static boolean checkDate(int year, int month, int day) {
 		if (year < 1900 || year > 2024) {
 			return false;
@@ -652,116 +682,51 @@ public class DoctorMenuResidencialArea {
 		return true;
 	}
 
-
+	/**
+	Generates an ECG plot based on the provided signal data and saves it as a PNG file.
+	@param args the input string containing the ECG signal data
+	@param file_name the name of the output file
+	 */
 	public static void ECGPlot(String args, String file_name) {
 		ArrayList<Double> column2 = new ArrayList<>();
-
 		String line = args;
-		//System.out.println(line);
-		//String[] values = line.split("\\t");
 		String[] filas = line.split("\n");
-
 		String[][] values = new String[filas.length][];
 		for (int i = 0; i < filas.length; i++) {
 			values[i] = filas[i].split("\\t");
 		}
-
 		for (int i = 0; i < values.length; i++) {
 			column2.add(Double.parseDouble(values[i][1]));
-
 		}
-		//System.out.print(column2 + "\t");
-		//column2.add(Double.parseDouble(values[1]));
-
-		//System.out.println(column2);
 		double[] signal = column2.stream().mapToDouble(Double::doubleValue).toArray();
-		//System.out.println(signal.length);
-		
 		// Redondear hacia arriba utilizando Math.ceil()
-        int longitud = (int) (Math.ceil(signal.length / 100.0) * 100);
-        //System.out.println(longitud);
-
+		int longitud = (int) (Math.ceil(signal.length / 100.0) * 100);
 		Plotting fig = new Plotting(longitud, 300, "ECG Wave", "Time", "Signal");
 		fig.initialisePlot();
 		fig.addSignal("ECG Wave", signal, false);
-		//fig.addSignal("ECG Wave", signal, false, "-");
 		try {
 			String diract = System.getProperty("user.dir"); 
 			String dirfolder = diract +"//ECG_plots";
 			file_name = dirfolder + file_name + ".png";
-			//fig.saveAsPNG("ECGPrueba.png");
 			fig.saveAsPNG(file_name);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Replaces commas in the input string with newline characters.
+	 *
+	 * @param stringleido the input string containing commas
+	 * @return the modified string with commas replaced by newline characters
+	 */
 	private static String convertCommaIntoLines(String stringleido) {
 		String signal = stringleido.replace(",", "\n");
 		return signal;
 	}
 
-//	public static void main(String[] args) {
-//		//leemos el fichero
-//		FileInputStream fileinputstream = null;
-//		InputStreamReader inputstreamreader = null;
-//		BufferedReader bufferedreader = null;
-//
-//		try {
-//			String diract = System.getProperty("user.dir"); // find where the program is executing
-//			String dirfolder = diract +"\\recordstxt";
-//			//System.out.println(dirfolder);
-//			File filetxt = new File(dirfolder, "222_Date_07-12-2023_Hour_05-05-15.txt");
-//			//System.out.println(filetxt.getAbsolutePath());
-//			fileinputstream = new FileInputStream(filetxt);
-//			inputstreamreader = new InputStreamReader(fileinputstream);
-//			bufferedreader = new BufferedReader(inputstreamreader);
-//			String texto = "";
-//			String stringleido;
-//			//stringleido = bufferedreader.readLine();
-//			while (true) {
-//				stringleido = bufferedreader.readLine();
-//				if (stringleido == null) {
-//					break;
-//				}
-//				texto = texto + stringleido + ",";
-//			}
-//
-//			//lo ploteamos
-//			String signal = convertCommaIntoLines(texto);
-//			ECGPlot(signal);
-//
-//		} catch (IOException ioe) {
-//			System.out.println("\nError durante el proceso\t" + ioe);
-//		} finally {
-//			try {  //se cierran en sentido contrario al que se han abierto
-//				if (bufferedreader != null) {
-//					bufferedreader.close();
-//				}
-//			} catch (IOException ioe) {
-//				System.out.println("\nError durante el proceso\t" + ioe);
-//			}
-//			try {
-//				if (inputstreamreader != null) {
-//					inputstreamreader.close();
-//				}
-//			} catch (IOException ioe) {
-//				System.out.println("\nError durante el proceso\t" + ioe);
-//			}
-//			try {
-//				if (fileinputstream != null) {
-//					fileinputstream.close();
-//				}
-//			} catch (IOException ioe) {
-//				System.out.println("\nError durante el proceso\t" + ioe);
-//			}
-//		}
-//
-//
-//	}
 
 
 }
