@@ -710,9 +710,10 @@ public class DoctorMenuResidencialArea {
 		fig.addSignal("ECG Wave", signal, false);
 		try {
 			String diract = System.getProperty("user.dir"); 
-			String dirfolder = diract +"//ECG_plots";
-			file_name = dirfolder + file_name + ".png";
-			fig.saveAsPNG(file_name);
+			String dirfolder = diract +"\\ECGplots";
+			file_name = file_name + ".png";
+			File f = new File(dirfolder, file_name);
+			fig.saveAsPNG(f.getName());
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 
